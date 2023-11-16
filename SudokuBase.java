@@ -1,6 +1,6 @@
 package sudoku;
-//import java.util.*;
-//import java.lang.*;
+import java.util.*;
+import java.lang.*;
 
 public class SudokuBase {
 
@@ -14,22 +14,19 @@ public class SudokuBase {
      */
     public static int saisirEntierMinMax(int min, int max){
 	//________________________________________________________
-		return 0;
+        return 0;
     }  // fin saisirEntierMinMax
     //.........................................................................
 
-
-    /** pré-requis : aucun
-     *  résultat : une copie de mat
-     *
+    /** MODIFICI
+     *  pré-requis : mat1 et mat2 ont les mêmes dimensions
+     *  action : copie toutes les valeurs de mat1 dans mat2 de sorte que mat1 et mat2 soient identiques
      */
-    public static int [][] copieMatrice(int [][] mat){
+    public static void copieMatrice(int[][] mat1, int[][] mat2){
 	//________________________________________________________
-		return null;
     }  // fin copieMatrice
 
     //.........................................................................
-
 
     /** pré-requis :  n >= 0
      *  résultat : un tableau de booléens représentant le sous-ensemble de l'ensemble des entiers 
@@ -37,7 +34,7 @@ public class SudokuBase {
      */
     public static boolean[] ensPlein(int n){
 	//_____________________________________
-		return null;
+        return null;
     }  // fin ensPlein
 
     //.........................................................................
@@ -49,7 +46,7 @@ public class SudokuBase {
      */
     public static boolean supprime(boolean[] ens, int val){
 	//______________________________________________________
-		return true;
+        return true;
     }  // fin supprime
 
     //.........................................................................
@@ -60,7 +57,7 @@ public class SudokuBase {
      */
     public static int uneValeur(boolean[] ens){
 	//_____________________________________________
-		return 0;
+        return 0;
     }  // fin uneValeur
 
     //.........................................................................
@@ -108,7 +105,7 @@ public class SudokuBase {
        */
     public static void afficheGrille(int k,int[][] g){
 	//__________________________________________________
-		
+
     } // fin afficheGrille
     //.........................................................................
 
@@ -120,7 +117,7 @@ public class SudokuBase {
      */
     public static int[] debCarre(int k,int i,int j){
 	//__________________________________________________
-		return null;
+        return null;
     }  // fin debCarre
 
 
@@ -129,28 +126,28 @@ public class SudokuBase {
     // Initialisation
     //.........................................................................
 
-
-    /** pré-requis : aucun
-     *  résultat :   une grille de Sudoku complète
-     *  stratégie :  les valeurs sont données dans le code
+    /** MODIFICI
+     *  pré-requis : gComplete est une matrice 9X9
+     *  action   :   remplit gComplete pour que la grille de Sudoku correspondante soit complète
+     *  stratégie :  les valeurs sont données directement dans le code et on peut utiliser copieMatrice pour mettre à jour gComplete
      */
-    public static int [][] initGrilleComplete(){
+    public static void initGrilleComplete(int [][] gComplete){
 	//_________________________________________________
-		return null;
+
     } // fin initGrilleComplete
 
     //.........................................................................
 
-
-    /** pré-requis : gSecret est une grille de Sudoku complète et 0 <= nbTrous <= 81
-     *  résultat :   une grille de Sudoku incomplète pouvant être complétée en gSecret 
-     *               et ayant nbTrous trous à des positions aléatoires
+    /** MODIFICI
+     *  pré-requis : gSecret est une grille de Sudoku complète de mêmes dimensions que gIncomplete et 0 <= nbTrous <= 81
+     *  action :     modifie gIncomplete pour qu'elle corresponde à une version incomplète de la grille de Sudoku gSecret (gIncomplete peut être complétée en gSecret), 
+     *               avec nbTrous trous à des positions aléatoires
      */
-    public static int [][] initGrilleIncomplete(int nbTrous, int [][] gSecret){
+    public static void initGrilleIncomplete(int nbTrous, int [][] gSecret, int[][] gIncomplete){
 	//___________________________________________________________________________
-		return null;
+	
     } // fin initGrilleIncomplete
-
+	
     //.........................................................................
 
 
@@ -214,22 +211,21 @@ public class SudokuBase {
 
 
     /** pré-requis : gSecret, gHumain et gOrdi sont des grilles 9x9
-     *  action :     demande au joueur humain de saisir le nombre nbTrous compris entre 0 et 81,
-     *               met dans gSecret une grille de Sudoku complète,
-     *               met dans gHumain une grille de Sudoku incomplète, pouvant être complétée en gSecret
-     *               et ayant exactement nbTrous trous de positions aléatoires,
-     *               met dans gOrdi une grille de Sudoku incomplète saisie par le joueur humain
-     *               ayant  nbTrous trous,
-     *               met dans valPossibles l'ensemble des valeurs possibles de chaque trou de gOrdi
-     *               et leur nombre dans nbValPoss.
+     *  action :     - demande au joueur humain de saisir le nombre nbTrous compris entre 0 et 81,
+     *               - met dans gSecret une grille de Sudoku complète,
+     *               - met dans gHumain une grille de Sudoku incomplète, pouvant être complétée en gSecret
+     *                  et ayant exactement nbTrous trous de positions aléatoires,
+     *               - met dans gOrdi une grille de Sudoku incomplète saisie par le joueur humain
+     *                  ayant  nbTrous trous,
+     *               - met dans valPossibles l'ensemble des valeurs possibles de chaque trou de gOrdi
+     *                  et leur nombre dans nbValPoss.
      * retour : la valeur de nbTrous
      */
-    public static int initPartie(int [][] gSecret, int [][] gHumain, int [][] gOrdi,
-				 boolean[][][] valPossibles, int [][]nbValPoss){
+    public static int initPartie(int [][] gSecret, int [][] gHumain, int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//______________________________________________________________________________________________
-			return 0;
-    }  // fin initPartie
-
+        return 0;
+    }
+	
     //...........................................................
     // Tour du joueur humain
     //...........................................................
@@ -243,7 +239,7 @@ public class SudokuBase {
      */
     public static int tourHumain(int [][] gSecret, int [][] gHumain){
 	//___________________________________________________________________
-		return 0;
+        return 0;
     }  // fin  tourHumain
 
     //.........................................................................
@@ -259,7 +255,7 @@ public class SudokuBase {
      */
     public static int[] chercheTrou(int[][] gOrdi,int [][]nbValPoss){
 	//___________________________________________________________________
-		return null;
+        return null;
     }  // fin chercheTrou
 
     //.........................................................................
@@ -271,7 +267,7 @@ public class SudokuBase {
      */
     public static int tourOrdinateur(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
-		return 0;
+        return 0;
     }  // fin tourOrdinateur
 
     //.........................................................................
@@ -279,17 +275,16 @@ public class SudokuBase {
     // Partie
     //.........................................................................
 
-
-
     /** pré-requis : aucun
-     *  action :     effectue une partie de Sudoku entre le joueur humain et l'ordinateur
+     *
+     *  action : crée et initialise les matrices utilisées dans une partie, et effectue une partie de Sudoku entre le joueur humain et l'ordinateur. 
+     *
      *  résultat :   0 s'il y a match nul, 1 si c'est le joueur humain qui gagne et 2 sinon
      */
     public static int partie(){
-	//__________________________
-		return 0;
+	//_____________________________
+        return 0;
     }  // fin partie
-
 
     //.........................................................................
 
