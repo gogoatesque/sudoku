@@ -1,4 +1,3 @@
-package sudoku;
 import java.util.*;
 import java.lang.*;
 
@@ -23,7 +22,11 @@ public class SudokuBase {
      *  action : copie toutes les valeurs de mat1 dans mat2 de sorte que mat1 et mat2 soient identiques
      */
     public static void copieMatrice(int[][] mat1, int[][] mat2){
-	//________________________________________________________
+        for (int i = 0; i < mat1.length; i++) {
+            for (int j = 0; j < mat1[i].length; j++) {
+                if (mat2[i][j] != mat1[i][j]) {mat2[i][j] = mat1[i][j];}
+            }
+        }
     }  // fin copieMatrice
 
     //.........................................................................
@@ -288,14 +291,12 @@ public class SudokuBase {
 
     //.........................................................................
 
-
     /** pré-requis : aucun
      *  action :     effectue une partie de Sudoku entre le joueur humain et l'ordinateur
      *               et affiche qui a gagné
      */
     public static void main(String[] args){
 	//________________________________________
-
     }  // fin main
 
 } // fin SudokuBase
