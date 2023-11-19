@@ -48,8 +48,11 @@ public class SudokuBase {
      *  résultat :   vrai ssi val était dans cet ensemble
      */
     public static boolean supprime(boolean[] ens, int val){
-	//______________________________________________________
-        return true;
+        if (ens[val]) {
+            ens[val] = false;
+            return true;
+        }
+        else return false;
     }  // fin supprime
 
     //.........................................................................
