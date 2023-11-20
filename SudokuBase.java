@@ -13,7 +13,7 @@ public class SudokuBase {
      */
     public static int saisirEntierMinMax(int min, int max){
 	//________________________________________________________
-
+        return 0;
     }  // fin saisirEntierMinMax
     //.........................................................................
 
@@ -37,7 +37,7 @@ public class SudokuBase {
      */
     public static boolean[] ensPlein(int n){
 	//_____________________________________
-
+        return null;
     }  // fin ensPlein
 
     //.........................................................................
@@ -52,7 +52,7 @@ public class SudokuBase {
             ens[val] = false;
             return true;
         }
-        else return false;
+        return false;
     }  // fin supprime
 
 
@@ -64,7 +64,7 @@ public class SudokuBase {
      */
     public static int uneValeur(boolean[] ens){
 	//_____________________________________________
-
+        return 0;
     }  // fin uneValeur
 
     //.........................................................................
@@ -124,7 +124,7 @@ public class SudokuBase {
      */
     public static int[] debCarre(int k,int i,int j){
 	//__________________________________________________
-
+        return null;
     }  // fin debCarre
 
 
@@ -140,7 +140,6 @@ public class SudokuBase {
      */
     public static void initGrilleComplete(int [][] gComplete){
 	//_________________________________________________
-
     } // fin initGrilleComplete
 
     //.........................................................................
@@ -230,7 +229,7 @@ public class SudokuBase {
      */
     public static int initPartie(int [][] gSecret, int [][] gHumain, int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//______________________________________________________________________________________________
-
+        return 0;
     }
 	
     //...........................................................
@@ -246,7 +245,7 @@ public class SudokuBase {
      */
     public static int tourHumain(int [][] gSecret, int [][] gHumain){
 	//___________________________________________________________________
-
+        return 0;
     }  // fin  tourHumain
 
     //.........................................................................
@@ -262,7 +261,7 @@ public class SudokuBase {
      */
     public static int[] chercheTrou(int[][] gOrdi,int [][]nbValPoss){
 	//___________________________________________________________________
-
+        return null;
     }  // fin chercheTrou
 
     //.........................................................................
@@ -274,7 +273,7 @@ public class SudokuBase {
      */
     public static int tourOrdinateur(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
-
+        return 0;
     }  // fin tourOrdinateur
 
     //.........................................................................
@@ -290,7 +289,7 @@ public class SudokuBase {
      */
     public static int partie(){
 	//_____________________________
-
+        return 2;
     }  // fin partie
 
     //.........................................................................
