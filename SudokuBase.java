@@ -1,3 +1,6 @@
+
+// Dernière mise à jour 19/11/2023
+
 import java.util.*;
 import java.lang.*;
 
@@ -13,7 +16,7 @@ public class SudokuBase {
      */
     public static int saisirEntierMinMax(int min, int max){
 	//________________________________________________________
-        return 0;
+
     }  // fin saisirEntierMinMax
     //.........................................................................
 
@@ -37,7 +40,7 @@ public class SudokuBase {
      */
     public static boolean[] ensPlein(int n){
 	//_____________________________________
-        return null;
+
     }  // fin ensPlein
 
     //.........................................................................
@@ -55,6 +58,7 @@ public class SudokuBase {
         else return false;
     }  // fin supprime
 
+
     //.........................................................................
 
 
@@ -63,7 +67,7 @@ public class SudokuBase {
      */
     public static int uneValeur(boolean[] ens){
 	//_____________________________________________
-        return 0;
+
     }  // fin uneValeur
 
     //.........................................................................
@@ -123,7 +127,7 @@ public class SudokuBase {
      */
     public static int[] debCarre(int k,int i,int j){
 	//__________________________________________________
-        return null;
+
     }  // fin debCarre
 
 
@@ -156,17 +160,17 @@ public class SudokuBase {
 	
     //.........................................................................
 
-
-    /** pré-requis : 0 <= nbTrous <= 81
-     *  résultat :   une grille  9x9 saisie dont les valeurs sont comprises ente 0 et 9
-     *               avec exactement  nbTrous valeurs nulles
+    /** MODIFICI
+     *  pré-requis : 0 <= nbTrous <= 81 ; g est une grille 9x9 (vide a priori)
+     *  action :   remplit g avec des valeurs saisies au clavier comprises entre 0 et 9
+     *               avec exactement nbTrous valeurs nulles
      *               et avec re-saisie jusqu'à ce que ces conditions soient vérifiées.
      *               On suppose dans la version de base que la grille saisie est bien une grille de Sudoku incomplète.
      *  stratégie : utilise la fonction saisirEntierMinMax
      */
-    public static int [][] saisirGrilleIncomplete(int nbTrous){
+    public static void saisirGrilleIncomplete(int nbTrous, int [][] g){
 	//_________________________________________________
-           return null;
+           
     }  // fin saisirGrilleIncomplete
 
     //.........................................................................
@@ -188,7 +192,7 @@ public class SudokuBase {
 
 
     /** pré-requis : gOrdi est une grille de Sudoku incomplète,
-     *               0<=i<9, 0<=j<9,g[i][j]>0,
+     *               0 <= i < 9, 0 <= j < 9, gOrdi[i][j] > 0,
      *               valPossibles est une matrice 9x9 de tableaux de 10 booléens
      *               et nbValPoss est une matrice 9x9 d'entiers
      *  action : supprime dans les matrices valPossibles et nbValPoss la valeur gOrdi[i][j] pour chaque case de la ligne,
@@ -229,7 +233,7 @@ public class SudokuBase {
      */
     public static int initPartie(int [][] gSecret, int [][] gHumain, int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//______________________________________________________________________________________________
-        return 0;
+
     }
 	
     //...........................................................
@@ -245,7 +249,7 @@ public class SudokuBase {
      */
     public static int tourHumain(int [][] gSecret, int [][] gHumain){
 	//___________________________________________________________________
-        return 0;
+
     }  // fin  tourHumain
 
     //.........................................................................
@@ -261,7 +265,7 @@ public class SudokuBase {
      */
     public static int[] chercheTrou(int[][] gOrdi,int [][]nbValPoss){
 	//___________________________________________________________________
-        return null;
+
     }  // fin chercheTrou
 
     //.........................................................................
@@ -273,7 +277,7 @@ public class SudokuBase {
      */
     public static int tourOrdinateur(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
-        return 0;
+
     }  // fin tourOrdinateur
 
     //.........................................................................
@@ -289,10 +293,11 @@ public class SudokuBase {
      */
     public static int partie(){
 	//_____________________________
-        return 0;
+
     }  // fin partie
 
     //.........................................................................
+
 
     /** pré-requis : aucun
      *  action :     effectue une partie de Sudoku entre le joueur humain et l'ordinateur
@@ -300,9 +305,7 @@ public class SudokuBase {
      */
     public static void main(String[] args){
 	//________________________________________
+
     }  // fin main
 
 } // fin SudokuBase
-
-
-
