@@ -102,9 +102,9 @@ public class SudokuBase {
        ------------------- 
        4 |9 5 8|3 1 2|4 7 6|
        5 |7 3 2|4 5 6|1 8 9|
-       6| 1 6 4|8 7 9|2 5 3|
+       6 |1 6 4|8 7 9|2 5 3|
        ------------------- 
-       7 3 8 1|5 2 7|9 6 4
+       7 |3 8 1|5 2 7|9 6 4|
        8 |5 9 6|1 3 4|7 2 8|
        9 |2 4 7|6 9 8|5 3 1|
        ------------------- 
@@ -138,7 +138,7 @@ public class SudokuBase {
         System.out.print("   ");
         for (int i=1; i <= k*k; i++) {System.out.print(i + " ");}
         System.out.println();
-        System.out.print("  -------------------");
+        System.out.print("---------------------");
         System.out.println();
         for (int i = 0; i < g.length; i++) {
             System.out.print((i+1) + " |");
@@ -339,17 +339,7 @@ public class SudokuBase {
      *               et affiche qui a gagné
      */
     public static void main(String[] args){
-	//________________________________________
-        int[][] S={{6,2,9,7,8,1,3,4,5},
-                   {4,7,3,9,6,5,8,1,2},
-                   {8,1,5,2,4,3,6,9,7},
-                   {9,5,8,3,1,2,4,7,6},
-                   {7,3,2,4,5,6,1,8,9},
-                   {1,6,4,8,7,9,2,5,3},
-                   {3,8,1,5,2,7,9,6,4},
-                   {5,9,6,1,3,4,7,2,8},
-                   {2,4,7,6,9,8,5,3,1}};
-        SudokuBase.afficheGrille(3,S);
+
     }  // fin main
 
 } // fin SudokuBase
