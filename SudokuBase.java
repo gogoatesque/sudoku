@@ -13,7 +13,13 @@ public class SudokuBase {
      */
     public static int saisirEntierMinMax(int min, int max){
 	//________________________________________________________
-        return 0;
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        while (n < min || n > max) {
+            System.out.print("Saisir une valeur correcte :");
+            n = scanner.nextInt();
+        }
+        return n;
     }  // fin saisirEntierMinMax
     //.........................................................................
 
@@ -37,7 +43,15 @@ public class SudokuBase {
      */
     public static boolean[] ensPlein(int n){
 	//_____________________________________
-        return null;
+        boolean[] TBool = new boolean[n];
+        int[] TInt = new int[n];
+        for (int i = 0; i < n; i++){
+            TInt[i] = i+1;
+        }
+        for (int i = 0; i < n; i++) {
+            TBool[i] = TInt[i] == n;
+        }
+        return TBool;
     }  // fin ensPlein
 
     //.........................................................................
