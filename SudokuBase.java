@@ -50,7 +50,7 @@ public class SudokuBase {
         return TBool;
     }  // fin ensPlein
 
-    /* ENSPLEIN 2
+    /* ENSPLEIN 2 NON FONCTIONNEL
         public static boolean[] ensPlein(int n){
 	//_____________________________________
         boolean[] TBool = new boolean[n];
@@ -324,7 +324,11 @@ public class SudokuBase {
      */
     public static void main(String[] args){
 	//________________________________________
-
+        boolean[] T=SudokuBase.ensPlein(5);
+        boolean[] U={true,true,true,true,true,true};
+        boolean[] V={false,true,true,true,true,true};
+        if (Arrays.equals(T,U) || Arrays.equals(T,V)) System.out.println("ok");
+        else System.out.println("pas ok");
     }  // fin main
 
 } // fin SudokuBase
