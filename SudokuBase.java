@@ -1,6 +1,3 @@
-
-// Dernière mise à jour 19/11/2023
-
 import java.util.*;
 import java.lang.*;
 
