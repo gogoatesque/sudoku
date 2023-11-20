@@ -135,7 +135,23 @@ public class SudokuBase {
        */
     public static void afficheGrille(int k,int[][] g){
 	//__________________________________________________
-
+        System.out.print("   ");
+        for (int i=1; i <= k*k; i++) {System.out.print(i + " ");}
+        System.out.println();
+        System.out.print("  -------------------");
+        System.out.println();
+        for (int i = 0; i < g.length; i++) {
+            System.out.print((i+1) + " |");
+            for (int j = 0; j < g[i].length; j++) {
+                if ((j+1)%k == 0) System.out.print(g[i][j] + "|");
+                else System.out.print(g[i][j] +" ");
+            }
+            System.out.println();
+            if ((i+1)%k == 0) {
+                System.out.print("---------------------");
+                System.out.println();
+            }
+        }
     } // fin afficheGrille
     //.........................................................................
 
@@ -324,11 +340,16 @@ public class SudokuBase {
      */
     public static void main(String[] args){
 	//________________________________________
-        boolean[] T=SudokuBase.ensPlein(5);
-        boolean[] U={true,true,true,true,true,true};
-        boolean[] V={false,true,true,true,true,true};
-        if (Arrays.equals(T,U) || Arrays.equals(T,V)) System.out.println("ok");
-        else System.out.println("pas ok");
+        int[][] S={{6,2,9,7,8,1,3,4,5},
+                   {4,7,3,9,6,5,8,1,2},
+                   {8,1,5,2,4,3,6,9,7},
+                   {9,5,8,3,1,2,4,7,6},
+                   {7,3,2,4,5,6,1,8,9},
+                   {1,6,4,8,7,9,2,5,3},
+                   {3,8,1,5,2,7,9,6,4},
+                   {5,9,6,1,3,4,7,2,8},
+                   {2,4,7,6,9,8,5,3,1}};
+        SudokuBase.afficheGrille(3,S);
     }  // fin main
 
 } // fin SudokuBase
