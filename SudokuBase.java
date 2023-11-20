@@ -43,6 +43,16 @@ public class SudokuBase {
      */
     public static boolean[] ensPlein(int n){
 	//_____________________________________
+        boolean[] TBool = new boolean[n+1];
+        for (int i = 0; i <= n; i++){
+            TBool[i] = true;
+        }
+        return TBool;
+    }  // fin ensPlein
+
+    /* ENSPLEIN 2
+        public static boolean[] ensPlein(int n){
+	//_____________________________________
         boolean[] TBool = new boolean[n];
         int[] TInt = new int[n];
         for (int i = 0; i < n; i++){
@@ -53,7 +63,6 @@ public class SudokuBase {
         }
         return TBool;
     }  // fin ensPlein
-
     //.........................................................................
 
 
