@@ -87,7 +87,12 @@ public class SudokuBase {
      */
     public static int uneValeur(boolean[] ens){
 	//_____________________________________________
-        return 0;
+        boolean trouve = false;
+        int i = 1;
+        while (i < ens.length && trouve == false) {
+            if (ens[i] && (i != 0)) trouve = true;
+        }
+        return i;
     }  // fin uneValeur
 
     //.........................................................................
@@ -178,7 +183,17 @@ public class SudokuBase {
      *  stratégie :  les valeurs sont données directement dans le code et on peut utiliser copieMatrice pour mettre à jour gComplete
      */
     public static void initGrilleComplete(int [][] gComplete){
-	//_________________________________________________
+        int [][] grille = 
+            {   { 5, 3, 4, 6, 7, 8, 9, 1, 2 },
+                { 6, 7, 2, 1, 9, 5, 3, 4, 8 },
+                { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+                { 8, 5, 9, 7, 6, 1, 4, 2, 3 },
+                { 4, 2, 6, 8, 5, 3, 7, 9, 1 },
+                { 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+                { 9, 6, 1, 5, 3, 7, 2, 8, 4 },
+                { 2, 8, 7, 4, 1, 9, 6, 3, 5 },
+                { 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+        copieMatrice(grille, gComplete);
     } // fin initGrilleComplete
 
     //.........................................................................
@@ -339,7 +354,6 @@ public class SudokuBase {
      *               et affiche qui a gagné
      */
     public static void main(String[] args){
-
     }  // fin main
 
 } // fin SudokuBase
