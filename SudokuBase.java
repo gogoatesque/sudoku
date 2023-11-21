@@ -3,6 +3,7 @@ import java.lang.*;
 
 public class SudokuBase {
 
+    private static Scanner scanner = new Scanner(System.in);
     //.........................................................................
     // Fonctions utiles
     //.........................................................................
@@ -13,13 +14,11 @@ public class SudokuBase {
      */
     public static int saisirEntierMinMax(int min, int max){
 	//________________________________________________________
-        Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         while (n < min || n > max) {
             System.out.print("Saisir une valeur correcte :");
             n = scanner.nextInt();
         }
-        scanner.close();
         return n;
     }  // fin saisirEntierMinMax
     //.........................................................................
