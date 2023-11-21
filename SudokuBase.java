@@ -90,7 +90,8 @@ public class SudokuBase {
         boolean trouve = false;
         int i = 1;
         while (i < ens.length && trouve == false) {
-            if (ens[i] && (i != 0)) trouve = true;
+            if (ens[i]) trouve = true;
+            else i++;
         }
         return i;
     }  // fin uneValeur
