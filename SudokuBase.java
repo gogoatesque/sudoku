@@ -19,6 +19,7 @@ public class SudokuBase {
             System.out.print("Saisir une valeur correcte :");
             n = scanner.nextInt();
         }
+        scanner.close();
         return n;
     }  // fin saisirEntierMinMax
     //.........................................................................
