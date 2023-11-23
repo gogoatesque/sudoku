@@ -75,7 +75,7 @@ public class SudokuBase {
             ens[val] = false;
             return true;
         }
-        return false;
+        else return false;
     }  // fin supprime
 
 
