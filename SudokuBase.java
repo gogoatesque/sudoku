@@ -14,12 +14,12 @@ public class SudokuBase {
      */
     public static int saisirEntierMinMax(int min, int max){
 	//________________________________________________________
-        int n = scanner.nextInt();
-        while (n < min || n > max) {
+        int k = scanner.nextInt();
+        while (k < min || k > max) {
             System.out.print("Saisir une valeur correcte :");
-            n = scanner.nextInt();
+            k = scanner.nextInt();
         }
-        return n;
+        return k;
     }  // fin saisirEntierMinMax
     //.........................................................................
 
@@ -37,29 +37,29 @@ public class SudokuBase {
 
     //.........................................................................
 
-    /** pré-requis :  n >= 0
+    /** pré-requis :  k >= 0
      *  résultat : un tableau de booléens représentant le sous-ensemble de l'ensemble des entiers 
-     *             de 1 à n égal à lui-même 
+     *             de 1 à k égal à lui-même 
      */
-    public static boolean[] ensPlein(int n){
+    public static boolean[] ensPlein(int k){
 	//_____________________________________
-        boolean[] TBool = new boolean[n+1];
-        for (int i = 0; i <= n; i++){
+        boolean[] TBool = new boolean[k+1];
+        for (int i = 0; i <= k; i++){
             TBool[i] = true;
         }
         return TBool;
     }  // fin ensPlein
 
     /* ENSPLEIN 2 NON FONCTIONNEL
-        public static boolean[] ensPlein(int n){
+        public static boolean[] ensPlein(int k){
 	//_____________________________________
-        boolean[] TBool = new boolean[n];
-        int[] TInt = new int[n];
-        for (int i = 0; i < n; i++){
+        boolean[] TBool = new boolean[k];
+        int[] TInt = new int[k];
+        for (int i = 0; i < k; i++){
             TInt[i] = i+1;
         }
-        for (int i = 0; i < n; i++) {
-            TBool[i] = TInt[i] == n;
+        for (int i = 0; i < k; i++) {
+            TBool[i] = TInt[i] == k;
         }
         return TBool;
     }  // fin ensPlein
@@ -82,7 +82,7 @@ public class SudokuBase {
     //.........................................................................
 
 
-    /** pré-requis : l'ensemble représenté par ens n'est pas vide
+    /** pré-requis : l'ensemble représenté par ens k'est pas vide
      *  résultat :   un élément de cet ensemble
      */
     public static int uneValeur(boolean[] ens){
@@ -169,7 +169,12 @@ public class SudokuBase {
      */
     public static int[] debCarre(int k,int i,int j){
 	//__________________________________________________
-        return null;
+        int[] Indice = new int[2];
+        int iCarre = (i/k); //la ligne du sous-carré -> quotient rond
+        int jCarre = (j/k); //la colonne du cous-carré -> quotient rond
+        Indice[0] = (iCarre*k); //quotient rond*k donne la position ligne 0 dans sous-carré
+        Indice[1] = (jCarre*k); //quotient rond*k donne la position colonne 0 dans sous-carré
+        return Indice;
     }  // fin debCarre
 
 
@@ -233,10 +238,10 @@ public class SudokuBase {
             for (int i = 0; i < g.length; i++) {
                 for (int j = 0; j < g[i].length; j++) {
                     System.out.println("Saisir une valeur : ");
-                    int n = scanner.nextInt();
-                    if (trou == nbTrous && n == 0) System.out.println("Il y a trop de trous, saisir une autre valeur : ");
+                    int k = scanner.nextInt();
+                    if (trou == nbTrous && k == 0) System.out.println("Il y a trop de trous, saisir une autre valeur : ");
                     else {
-                        g[i][j] = n;
+                        g[i][j] = k;
                         if (g[i][j] == 0) trou++;
                     }
                 }
