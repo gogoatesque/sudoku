@@ -144,7 +144,7 @@ public class SudokuBase {
         System.out.print("   ");
         for (int i=1; i <= k*k; i++) {System.out.print(i + " ");}
         System.out.println();
-        System.out.print("---------------------");
+        for (int i = 0; i<= k*k*2+3; i++) {System.out.print("-");}
         System.out.println();
         for (int i = 0; i < g.length; i++) {
             System.out.print((i+1) + " |");
@@ -154,7 +154,7 @@ public class SudokuBase {
             }
             System.out.println();
             if ((i+1)%k == 0) {
-                System.out.print("---------------------");
+                for (int j = 0; j<= k*k*2+3; j++) {System.out.print("-");}
                 System.out.println();
             }
         }
@@ -207,7 +207,14 @@ public class SudokuBase {
     public static void initGrilleIncomplete(int nbTrous, int [][] gSecret, int[][] gIncomplete){
 	//___________________________________________________________________________
         copieMatrice(gSecret, gIncomplete);
-        
+        for (int i = 1; i <= nbTrous; i++) {
+            int ligne = Ut.randomMinMax(0, gIncomplete.length-1);
+            int colonne = Ut.randomMinMax(0, gIncomplete[ligne].length-1);
+            if (gIncomplete[ligne][colonne] == 0) {
+                i--;
+            }
+            else gIncomplete[ligne][colonne] = 0;
+        }
     } // fin initGrilleIncomplete
 	
     //.........................................................................
