@@ -206,7 +206,8 @@ public class SudokuBase {
      */
     public static void initGrilleIncomplete(int nbTrous, int [][] gSecret, int[][] gIncomplete){
 	//___________________________________________________________________________
-	
+        copieMatrice(gSecret, gIncomplete);
+        
     } // fin initGrilleIncomplete
 	
     //.........................................................................
