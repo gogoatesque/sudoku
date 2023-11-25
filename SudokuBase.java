@@ -370,7 +370,34 @@ public class SudokuBase {
      */
     public static int[] chercheTrou(int[][] gOrdi,int [][]nbValPoss){
 	//___________________________________________________________________
-        return null;
+
+        boolean trouve = false;
+        int i = 0;
+        int j = 0;
+        int [] coord = new int [2];
+        while (!trouve && i < gOrdi.length) {
+            while (!trouve && j < gOrdi[i].length) {
+                if(gOrdi[i][j] == 0 && nbValPoss[i][j] == 1) {
+                    trouve = true;
+                    coord[0] = i;
+                    coord[1] = j;
+                }
+                else j++;
+            }
+            i++;
+        }
+        while (!trouve && i < gOrdi.length) {
+            while (!trouve && j < gOrdi[i].length) {
+                if(gOrdi[i][j] == 0) {
+                    trouve = true;
+                    coord[0] = i;
+                    coord[1] = j;
+                }
+                else j++;
+            }
+            i++;
+        }
+        return coord;
     }  // fin chercheTrou
 
     //.........................................................................
@@ -419,7 +446,6 @@ public class SudokuBase {
 		   {3,8,1,5,2,7,9,6,4},
 		   {5,9,6,1,3,4,7,2,8},
 		   {2,4,7,6,9,8,5,3,1}};
-        saisirGrilleIncomplete(5, grille);
     }  // fin main
 
 } // fin SudokuBase
