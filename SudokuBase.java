@@ -261,7 +261,16 @@ public class SudokuBase {
      */
     public static void initPleines(int [][] gOrdi, boolean[][][] valPossibles, int [][] nbValPoss){
 	//________________________________________________________________________________________________
-
+        for(int x=0; x<gOrdi.length; x++){ //parcours des lignes
+            for(int y=0; y<gOrdi.length; y++){ //parcours des colonnes 
+                if(gOrdi[x][y] == 0){ //Si il rencontre un trou
+                    nbValPoss[x][y] = 9; //change le nb de valeurs possibles dans nbValPoss à 9
+                    for(int z=0; z<valPossibles[0][0].length; z++){ //parcours du tableau de boooleen correspondant à la case
+                        valPossibles[x][y][z] = true; //remplace chaque valeur du tab de boolean correspondant au trou par true
+                    }
+                }
+            }
+        }
     }  // fin initPleines
 
     //.........................................................................
@@ -275,8 +284,9 @@ public class SudokuBase {
      *           de la colonne et du carré contenant la case (i,j) correspondant à un trou de gOrdi.
      */
     public static void suppValPoss(int [][] gOrdi, int i, int j, boolean[][][] valPossibles, int [][]nbValPoss){
-	//_____________________________________________________________________________________________________________
 
+	//_____________________________________________________________________________________________________________
+        
     }  // fin suppValPoss
 
 
