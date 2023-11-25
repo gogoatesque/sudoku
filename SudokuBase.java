@@ -284,9 +284,28 @@ public class SudokuBase {
      *           de la colonne et du carré contenant la case (i,j) correspondant à un trou de gOrdi.
      */
     public static void suppValPoss(int [][] gOrdi, int i, int j, boolean[][][] valPossibles, int [][]nbValPoss){
-
 	//_____________________________________________________________________________________________________________
-        
+        int nb = gOrdi[i][j];
+        //modif sur la ligne
+        for (int a = 0; a < gOrdi.length; a++) {
+            if (a != j) {
+                nbValPoss[i][a] -= 1;
+                valPossibles[i][a][nb] = false;
+            }
+        }
+        //modif sur la colonne
+        for (int b = 0; b < gOrdi.length; b++) {
+            nbValPoss[b][j] -= 1;
+            valPossibles[b][j][nb] = false;
+        }
+        //modif carré
+        int [] tablo = debCarre(3, i, j);
+        for (int a = tablo[0]; a <= tablo[0]+2; a++) {
+            for (int b = tablo[1]; b <= tablo[1]+2; b++) {
+                nbValPoss[b][j] -= 1;
+                valPossibles[b][j][nb] = false;
+            }
+        }
     }  // fin suppValPoss
 
 
