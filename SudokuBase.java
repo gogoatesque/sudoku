@@ -144,7 +144,7 @@ public class SudokuBase {
     System.out.print("   ");
     for (int i=1; i <= k*k; i++) {System.out.print(i + " ");}
     System.out.println();
-    for (int i = 0; i<= k*k*2+3; i++) {System.out.print("-");}
+    for (int i = 0; i<= k*k*2+2; i++) {System.out.print("-");}
     System.out.println();
     for (int i = 0; i < g.length; i++) {
         System.out.print((i+1) + " |");
@@ -154,7 +154,7 @@ public class SudokuBase {
         }
         System.out.println();
         if ((i+1)%k == 0) {
-            for (int j = 0; j<= k*k*2+3; j++) {System.out.print("-");}
+            for (int j = 0; j<= k*k*2+2; j++) {System.out.print("-");}
             System.out.println();
         }
     }
