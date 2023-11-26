@@ -141,23 +141,21 @@ public class SudokuBase {
        */
     public static void afficheGrille(int k,int[][] g){
 	//__________________________________________________
-    if (k!=0) {
-        System.out.print("   ");
-        for (int i = 1; i <= kk; i++) {System.out.print(i + " ");}
+    System.out.print("   ");
+    for (int i=1; i <= k*k; i++) {System.out.print(i + " ");}
+    System.out.println();
+    for (int i = 0; i<= k*k*2+3; i++) {System.out.print("-");}
+    System.out.println();
+    for (int i = 0; i < g.length; i++) {
+        System.out.print((i+1) + " |");
+        for (int j = 0; j < g[i].length; j++) {
+            if ((j+1)%k == 0) System.out.print(g[i][j] + "|");
+            else System.out.print(g[i][j] +" ");
+        }
         System.out.println();
-        for (int i = 0; i<= kk2+2; i++) {System.out.print("-");}
-        System.out.println();
-        for (int i = 0; i < g.length; i++) {
-            System.out.print((i+1) + " |");
-            for (int j = 0; j < g[i].length; j++) {
-                if ((j+1)%k == 0) System.out.print(g[i][j] + "|");
-                else System.out.print(g[i][j] +" ");
-            }
+        if ((i+1)%k == 0) {
+            for (int j = 0; j<= k*k*2+3; j++) {System.out.print("-");}
             System.out.println();
-            if ((i+1)%k == 0) {
-                for (int j = 0; j<= kk*2+2; j++) {System.out.print("-");}
-                System.out.println();
-            }
         }
     }
     } // fin afficheGrille
