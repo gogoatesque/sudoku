@@ -265,9 +265,7 @@ public class SudokuBase {
             for(int y=0; y<gOrdi.length; y++){ //parcours des colonnes 
                 if(gOrdi[x][y] == 0){ //Si il rencontre un trou
                     nbValPoss[x][y] = 9; //change le nb de valeurs possibles dans nbValPoss à 9
-                    for(int z=0; z<valPossibles[0][0].length; z++){ //parcours du tableau de boooleen correspondant à la case
-                        valPossibles[x][y][z] = true; //remplace chaque valeur du tab de boolean correspondant au trou par true
-                    }
+                    valPossibles[x][y] = ensPlein(9); //remplace chaque valeur du tab de boolean correspondant au trou par true
                 }
             }
         }
