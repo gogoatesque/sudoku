@@ -141,23 +141,23 @@ public class SudokuBase {
        */
     public static void afficheGrille(int k,int[][] g){
 	//__________________________________________________
-        System.out.print("   ");
-        for (int i=1; i <= k*k; i++) {System.out.print(i + " ");}
-        System.out.println();
-        for (int i = 0; i<= k*k*2+3; i++) {System.out.print("-");}
-        System.out.println();
-        for (int i = 0; i < g.length; i++) {
-            System.out.print((i+1) + " |");
-            for (int j = 0; j < g[i].length; j++) {
-                if ((j+1)%k == 0) System.out.print(g[i][j] + "|");
-                else System.out.print(g[i][j] +" ");
-            }
-            System.out.println();
-            if ((i+1)%k == 0) {
-                for (int j = 0; j<= k*k*2+3; j++) {System.out.print("-");}
-                System.out.println();
-            }
+    System.out.print("   ");
+    for (int i=1; i <= k*k; i++) {System.out.print(i + " ");}
+    System.out.println();
+    for (int i = 0; i<= k*k*2+2; i++) {System.out.print("-");}
+    System.out.println();
+    for (int i = 0; i < g.length; i++) {
+        System.out.print((i+1) + " |");
+        for (int j = 0; j < g[i].length; j++) {
+            if ((j+1)%k == 0) System.out.print(g[i][j] + "|");
+            else System.out.print(g[i][j] +" ");
         }
+        System.out.println();
+        if ((i+1)%k == 0) {
+            for (int j = 0; j<= k*k*2+2; j++) {System.out.print("-");}
+            System.out.println();
+        }
+    }
     } // fin afficheGrille
     //.........................................................................
 
@@ -234,20 +234,18 @@ public class SudokuBase {
      */
     public static void saisirGrilleIncomplete(int nbTrous, int [][] g){
 	//_________________________________________________
-            int trou = 0;
-            for (int i = 0; i < g.length; i++) {
-                for (int j = 0; j < g[i].length; j++) {
-                    System.out.println("Saisir une valeur : ");
-                    int k = scanner.nextInt();
-                    if (trou == nbTrous && k == 0) System.out.println("Il y a trop de trous, saisir une autre valeur : ");
-                    else {
-                        g[i][j] = k;
-                        if (g[i][j] == 0) trou++;
-                    }
+        int trou = 0;
+        for (int i = 0; i < g.length; i++) {
+            for (int j = 0; j < g[i].length; j++) {
+                int k = saisirEntierMinMax(0,9);
+                if (trou == nbTrous && k == 0) System.out.println("Il y a trop de trous, saisir une autre valeur : ");
+                else {
+                    g[i][j] = k;
+                    if (g[i][j] == 0) trou++;
                 }
             }
-    }
-      // fin saisirGrilleIncomplete
+        }
+    } // fin saisirGrilleIncomplete
 
     //.........................................................................
 
@@ -265,9 +263,7 @@ public class SudokuBase {
             for(int y=0; y<gOrdi.length; y++){ //parcours des colonnes 
                 if(gOrdi[x][y] == 0){ //Si il rencontre un trou
                     nbValPoss[x][y] = 9; //change le nb de valeurs possibles dans nbValPoss à 9
-                    for(int z=0; z<valPossibles[0][0].length; z++){ //parcours du tableau de boooleen correspondant à la case
-                        valPossibles[x][y][z] = true; //remplace chaque valeur du tab de boolean correspondant au trou par true
-                    }
+                    valPossibles[x][y] = ensPlein(9); //remplace chaque valeur du tab de boolean correspondant au trou par true
                 }
             }
         }
