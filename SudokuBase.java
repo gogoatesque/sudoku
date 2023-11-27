@@ -319,7 +319,15 @@ public class SudokuBase {
      */
     public static void initPossibles(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
-  
+        int n = gOrdi.length; //Stocke la longueur
+
+        initPleines(gOrdi, valPossibles, nbValPoss); //Initialise la grille
+
+        for(int i = 0; i < n; i++){ //Supprime les valeurs pas possibles
+            for(int j = 0; j < n; j++){
+                suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
+            }
+        }
     }  // fin initPossibles
 
     //.........................................................................
