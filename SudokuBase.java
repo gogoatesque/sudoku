@@ -235,13 +235,17 @@ public class SudokuBase {
     public static void saisirGrilleIncomplete(int nbTrous, int [][] g){
 	//_________________________________________________
         int trou = 0;
+        int k = 0;
         for (int i = 0; i < g.length; i++) {
             for (int j = 0; j < g[i].length; j++) {
-                int k = saisirEntierMinMax(0,9);
-                if (trou == nbTrous && k == 0) System.out.println("Il y a trop de trous, saisir une autre valeur : ");
-                else {
+                if (trou < nbTrous) {
+                    k = saisirEntierMinMax(0,9);
                     g[i][j] = k;
-                    if (g[i][j] == 0) trou++;
+                    if (k == 0) trou++;
+                }
+                else if (trou == nbTrous){
+                    k = saisirEntierMinMax(1,9);
+                    g[i][j] = k;
                 }
             }
         }
@@ -433,15 +437,17 @@ public class SudokuBase {
      */
     public static void main(String[] args){
         int [][] grille = 
-          {{6,2,9,7,8,1,3,4,5},
-		   {4,7,3,9,6,5,8,1,2},
-		   {8,1,5,2,4,3,6,9,7},
-		   {9,5,8,3,1,2,4,7,6},
-		   {7,3,2,4,5,6,1,8,9},
-		   {1,6,4,8,7,9,2,5,3},
-		   {3,8,1,5,2,7,9,6,4},
-		   {5,9,6,1,3,4,7,2,8},
-		   {2,4,7,6,9,8,5,3,1}};
+          {{0,0,0,0,0,0,0,0,0},
+		   {0,0,0,0,0,0,0,0,0},
+		   {0,0,0,0,0,0,0,0,0},
+		   {0,0,0,0,0,0,0,0,0},
+		   {0,0,0,0,0,0,0,0,0},
+		   {0,0,0,0,0,0,0,0,0},
+		   {0,0,0,0,0,0,0,0,0},
+		   {0,0,0,0,0,0,0,0,0},
+		   {0,0,0,0,0,0,0,0,0}};
+        saisirGrilleIncomplete(3,grille);
+        afficheGrille(3, grille);
     }  // fin main
 
 } // fin SudokuBase
