@@ -288,22 +288,29 @@ public class SudokuBase {
         int nb = gOrdi[i][j];
         //modif sur la ligne
         for (int a = 0; a < gOrdi.length; a++) {
-            if (a != j) {
-                nbValPoss[i][a] -= 1;
-                valPossibles[i][a][nb] = false;
+            if (gOrdi[i][a] == 0) {
+                if (supprime(valPossibles[i][a], nb)) {
+                    nbValPoss[i][a] -= 1;
+                }
             }
         }
         //modif sur la colonne
         for (int b = 0; b < gOrdi.length; b++) {
-            nbValPoss[b][j] -= 1;
-            valPossibles[b][j][nb] = false;
+            if (gOrdi[b][j] == 0) {
+                if (supprime(valPossibles[b][j], nb)) {
+                    nbValPoss[b][j] -= 1;
+                }
+            }
         }
         //modif carré
         int [] tablo = debCarre(3, i, j);
-        for (int a = tablo[0]; a <= tablo[0]+2; a++) {
-            for (int b = tablo[1]; b <= tablo[1]+2; b++) {
-                nbValPoss[b][j] -= 1;
-                valPossibles[b][j][nb] = false;
+        for (int a = tablo[0]; a <= (tablo[0]+2); a++) {
+            for (int b = tablo[1]; b <= (tablo[1]+2); b++) {
+                if (gOrdi[a][b] == 0) {
+                    if (supprime(valPossibles[a][b], nb)) {
+                        nbValPoss[a][b] -= 1;
+                    }
+                }
             }
         }
     }  // fin suppValPoss
@@ -394,6 +401,10 @@ public class SudokuBase {
             }
             i++;
         }
+        if (!trouve) {
+            i = 0;
+            j = 0;
+        }
         while (!trouve && i < gOrdi.length) {
             while (!trouve && j < gOrdi[i].length) {
                 if(gOrdi[i][j] == 0) {
@@ -438,24 +449,20 @@ public class SudokuBase {
 
     //.........................................................................
 
-
     /** pré-requis : aucun
      *  action :     effectue une partie de Sudoku entre le joueur humain et l'ordinateur
      *               et affiche qui a gagné
      */
     public static void main(String[] args){
-        int [][] grille = 
-          {{0,0,0,0,0,0,0,0,0},
-		   {0,0,0,0,0,0,0,0,0},
-		   {0,0,0,0,0,0,0,0,0},
-		   {0,0,0,0,0,0,0,0,0},
-		   {0,0,0,0,0,0,0,0,0},
-		   {0,0,0,0,0,0,0,0,0},
-		   {0,0,0,0,0,0,0,0,0},
-		   {0,0,0,0,0,0,0,0,0},
-		   {0,0,0,0,0,0,0,0,0}};
-        saisirGrilleIncomplete(3,grille);
-        afficheGrille(3, grille);
+        int[][] Grille={{6,2,9,7,8,1,3,4,5},
+                        {4,0,3,9,6,5,8,1,2},
+                        {8,1,0,2,4,3,0,9,7},
+                        {9,5,8,3,1,2,4,7,6},
+                        {7,3,2,4,5,6,1,8,9},
+                        {1,6,4,8,7,9,2,5,3},
+                        {3,8,1,5,2,7,9,6,0},
+                        {5,9,6,1,3,4,7,2,8},
+                        {2,4,7,6,9,8,5,3,1}};
     }  // fin main
 
 } // fin SudokuBase
