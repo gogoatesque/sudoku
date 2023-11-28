@@ -428,7 +428,17 @@ public class SudokuBase {
      */
     public static int tourOrdinateur(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
-        return 0;
+        int penalite = 0;
+        int [] trouEvident = chercheTrou(gOrdi, nbValPoss);
+        int i = trouEvident[0];
+        int j = trouEvident[1];
+        int nombre = uneValeur(valPossibles[i][j]);
+        if (nbValPoss[i][j] == 1) {gOrdi[i][j] = nombre;}
+        else if (nbValPoss[i][j] > 1) {
+            penalite++;
+            gOrdi[i][j] = nombre;
+        }
+        return penalite;
     }  // fin tourOrdinateur
 
     //.........................................................................
