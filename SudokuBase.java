@@ -289,11 +289,9 @@ public class SudokuBase {
         //modif sur la ligne
         for (int a = 0; a < gOrdi.length; a++) {
             if (gOrdi[i][a] == 0) {
-                if (supprime(valPossibles[i][a], nb)) {
-                    nbValPoss[i][a] -= 1;
+        nbValPoss[i][a] -= 1;
                 }
             }
-        }
         //modif sur la colonne
         for (int b = 0; b < gOrdi.length; b++) {
             if (gOrdi[b][j] == 0) {
@@ -313,7 +311,7 @@ public class SudokuBase {
                 }
             }
         }
-    }  // fin suppValPoss
+    }// fin suppValPoss
 
 
     //.........................................................................
