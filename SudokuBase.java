@@ -288,26 +288,22 @@ public class SudokuBase {
         int nb = gOrdi[i][j];
         //modif sur la ligne
         for (int a = 0; a < gOrdi.length; a++) {
-            if (gOrdi[i][a] == 0) {
-        nbValPoss[i][a] -= 1;
-                }
+            if (gOrdi[i][a] == 0 && supprime(valPossibles[i][a], nb)) {
+                nbValPoss[i][a] -= 1;
             }
+        }
         //modif sur la colonne
         for (int b = 0; b < gOrdi.length; b++) {
-            if (gOrdi[b][j] == 0) {
-                if (supprime(valPossibles[b][j], nb)) {
-                    nbValPoss[b][j] -= 1;
-                }
+            if (gOrdi[b][j] == 0 && supprime(valPossibles[b][j], nb)) {
+                nbValPoss[b][j] -= 1;
             }
         }
         //modif carré
         int [] tablo = debCarre(3, i, j);
         for (int a = tablo[0]; a <= (tablo[0]+2); a++) {
             for (int b = tablo[1]; b <= (tablo[1]+2); b++) {
-                if (gOrdi[a][b] == 0) {
-                    if (supprime(valPossibles[a][b], nb)) {
-                        nbValPoss[a][b] -= 1;
-                    }
+                if (gOrdi[a][b] == 0 && supprime(valPossibles[a][b], nb)) {
+                    nbValPoss[a][b] -= 1;
                 }
             }
         }
