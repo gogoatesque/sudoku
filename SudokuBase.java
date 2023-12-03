@@ -347,7 +347,12 @@ public class SudokuBase {
      */
     public static int initPartie(int [][] gSecret, int [][] gHumain, int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//______________________________________________________________________________________________
-        return 0;
+        int nbTrous = saisirEntierMinMax(0, 81);
+        initGrilleComplete(gSecret);
+        initGrilleIncomplete(nbTrous, gSecret, gHumain);
+        saisirGrilleIncomplete(nbTrous, gOrdi);
+        initPossibles(gOrdi, valPossibles, nbValPoss);
+        return nbTrous;
     }
 	
     //...........................................................
