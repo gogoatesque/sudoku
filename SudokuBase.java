@@ -507,33 +507,10 @@ public class SudokuBase {
      *               et affiche qui a gagné
      */
     public static void main(String[] args){
-        /*int gagnant = partie();
+        int gagnant = partie();
         if (gagnant == 0) System.out.println("C'est un match nul !");
         else if (gagnant == 1) System.out.println("L'humain a gagné !");
-        else System.out.println("L'ordinateur a gagné !");*/
-        int[][] grilleTrouée={
-            {6,2,9,7,8,1,3,0,5},
-            {4,7,3,9,6,5,8,1,2},
-            {8,1,5,2,4,3,6,9,7},
-            {9,5,8,3,1,2,4,7,6},
-            {7,3,0,4,5,6,1,8,9},
-            {1,6,4,8,7,9,2,5,3},
-            {3,8,1,5,2,7,9,6,4},
-            {5,9,6,1,3,4,0,2,8},
-            {2,4,7,6,9,8,5,3,1}};
-        int[][] nbValeursPossibles=new int[9][9];
-        nbValeursPossibles[1][5]=1;
-        nbValeursPossibles[0][7]=2;
-        nbValeursPossibles[4][2]=1;
-        nbValeursPossibles[5][1]=1;
-        nbValeursPossibles[7][6]=3;
-        int[] trou=SudokuBase.chercheTrou(grilleTrouée,nbValeursPossibles);
-        System.out.println(Arrays.toString(trou));
-        nbValeursPossibles[4][2]=3;
-        int[] trou2=SudokuBase.chercheTrou(grilleTrouée,nbValeursPossibles);
-        System.out.println(Arrays.toString(trou2));
-        if (trou[0]==4 && trou[1]==2 && trou2[0]==0 && trou2[1]==7) System.out.println("gg wp");
-        else System.out.println("trop guez wola");
+        else System.out.println("L'ordinateur a gagné !");
     }  // fin main
 
 } // fin SudokuBase
