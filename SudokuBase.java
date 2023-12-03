@@ -368,7 +368,32 @@ public class SudokuBase {
      */
     public static int tourHumain(int [][] gSecret, int [][] gHumain){
 	//___________________________________________________________________
-        return 0;
+        int penalite = 0;
+        boolean Check = false;
+        while (!Check) {
+            System.out.print("Entrez une ligne : ");
+            int L = scanner.nextInt() - 1; //Correction d'indice
+            System.out.print("Entrez une colonne : ");
+            int C = scanner.nextInt() - 1; //Correction d'indice
+            System.out.println("Voulez vous remplir ou joker? ");
+            System.out.println("Remplir : 0 et Joker : 1");
+            System.out.print("Votre réponse : ");
+            int Rep = saisirEntierMinMax(0, 1);
+            if(Rep == 0){
+                System.out.print("Entrez une valeur : ");
+                int val = scanner.nextInt();
+                if(val != gSecret[L][C]){
+                    penalite++;
+                }else{
+                    Check = true;
+                }
+            }else{
+                gHumain[L][C] = gSecret[L][C];
+                penalite++;
+                Check = true;
+            }
+        }
+        return penalite;
     }  // fin  tourHumain
 
     //.........................................................................
