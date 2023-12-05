@@ -489,13 +489,26 @@ public class SudokuBase {
         int i = trouEvident[0];
         int j = trouEvident[1];
         int nombre = uneValeur(valPossibles[i][j]);
-        if (nbValPoss[i][j] == 1) {gOrdi[i][j] = nombre;}
-        else if (nbValPoss[i][j] > 1) {
+        if (nbValPoss[i][j] == 1) {
+            gOrdi[i][j] = nombre;
+            suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
+            System.out.println("TROP EZZZ TROU EVIDENNNT");
+        }
+        else if (nbValPoss[i][j] > 2) {
             penalite++;
             gOrdi[i][j] = nombre;
+            suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             System.out.println("Pénalité ! L'ordinateur a pris un joker");
         }
-        suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
+        else if (nbValPoss[i][j] == 2) {
+            System.out.println("L'ordinateur a choisi" + nombre + "est-ce correct ? Tapez 1 pour oui et 0 pour non");
+            int reponse = saisirEntierMinMax(0,1);
+            if (reponse == 1) {
+                gOrdi[i][j] = nombre;
+                suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
+            }
+            else if (reponse == 0) {penalite++;}
+        }
         return penalite;
     }  // fin tourOrdinateur
 
