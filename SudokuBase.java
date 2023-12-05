@@ -1,5 +1,8 @@
 import java.util.*;
 import java.lang.*;
+import java.io.IOException; 
+import java.io.BufferedReader; 
+import java.io.FileReader; 
 
 public class SudokuBase {
 
@@ -49,22 +52,6 @@ public class SudokuBase {
         }
         return TBool;
     }  // fin ensPlein
-
-    /* ENSPLEIN 2 NON FONCTIONNEL
-        public static boolean[] ensPlein(int k){
-	//_____________________________________
-        boolean[] TBool = new boolean[k];
-        int[] TInt = new int[k];
-        for (int i = 0; i < k; i++){
-            TInt[i] = i+1;
-        }
-        for (int i = 0; i < k; i++) {
-            TBool[i] = TInt[i] == k;
-        }
-        return TBool;
-    }  // fin ensPlein
-    //.........................................................................
-
 
     /** pré-requis : 1 <= val < ens.length
      *  action :     supprime la valeur val de l'ensemble représenté par ens, s'il y est
@@ -258,6 +245,37 @@ public class SudokuBase {
 
     //.........................................................................
 
+    /** MODIFICI
+     *  pré-requis : 0 <= nbTrous <= 81 ; g est une grille 9x9 (vide a priori) ; 
+     *               fic est un nom de fichier de ce répertoire contenant des valeurs de Sudoku
+     *  action :   remplit g avec les valeurs lues dans fic. Si la grille ne contient pas des valeurs 
+     *             entre 0 et 9 ou n'a pas exactement nbTrous valeurs nulles, la méthode doit signaler l'erreur,
+     *             et l'utilisateur doit corriger le fichier jusqu'à ce que ces conditions soient vérifiées.
+     *             On suppose dans la version de base que la grille saisie est bien une grille de Sudoku incomplète.
+     */
+    public static void saisirGrilleIncompleteFichier(int nbTrous, int [][] g, String fic){
+	//_________________________________________________
+
+	try (BufferedReader lecteur = new BufferedReader(new FileReader(fic))) {  
+        int trou = 0;
+	    for (int i = 0 ; i < 9 ; i++){
+		String ligne = lecteur.readLine();
+		String [] valeurs = ligne.split("\\s+");
+		for (int j = 0 ; j < 9 ; j++) {
+            int valeur = Integer.parseInt(valeurs[j]);
+                if (valeur < 0 || valeur > 9) {
+                    System.out.println("Erreur : La valeur doit être entre 0 et 9 inclus");
+                    return;
+                }
+		    g[i][j] = valeur;
+            if (valeur == 0) {trou++;}
+		}
+	    }
+        if (trou > nbTrous) {System.out.println("Attention il y a trop de trous ! Veuillez corriger");}
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    } // fin saisirGrilleIncompleteFichier
 
 
     /** pré-requis : gOrdi est une grille de Sudoku incomplète,
@@ -357,7 +375,7 @@ public class SudokuBase {
         int nbTrous = saisirEntierMinMax(0, 81);
         initGrilleComplete(gSecret);
         initGrilleIncomplete(nbTrous, gSecret, gHumain);
-        saisirGrilleIncomplete(nbTrous, gOrdi);
+        saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille1.txt");
         initPossibles(gOrdi, valPossibles, nbValPoss);
         return nbTrous;
     }
@@ -392,12 +410,15 @@ public class SudokuBase {
                 if(Rep != 0){
                     if(Rep != gSecret[L][C]){
                         penalite++;
+                        System.out.println("Pénalité ! Ce n'est pas la bonne réponse");
                     }else{
+                        gHumain[L][C] = Rep;
                         Check = true;
                     }
                 }else{
                     gHumain[L][C] = gSecret[L][C];
                     penalite++;
+                    System.out.println("Pénalité ! Tu as pris un joker !");
                     Check = true;
                 }
             }
@@ -472,6 +493,7 @@ public class SudokuBase {
         else if (nbValPoss[i][j] > 1) {
             penalite++;
             gOrdi[i][j] = nombre;
+            System.out.println("Pénalité ! L'ordinateur a pris un joker");
         }
         suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
         return penalite;
@@ -498,7 +520,7 @@ public class SudokuBase {
         int nbTrous = initPartie(gSecret, gHumain, gOrdi, valPossibles, nbValPoss);
         int penaliteHumain = 0;
         int penaliteOrdi = 0;
-        for (int i = 0; i <= nbTrous; i++) {
+        for (int i = 0; i < nbTrous; i++) {
             afficheGrille(3, gOrdi);
             afficheGrille(3, gHumain);
             penaliteHumain += tourHumain(gSecret, gHumain);
