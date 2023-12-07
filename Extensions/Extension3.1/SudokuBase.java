@@ -492,7 +492,7 @@ public class SudokuBase {
         if (nbValPoss[i][j] == 1) {
             gOrdi[i][j] = nombre;
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
-            System.out.println("TROP EZZZ TROU EVIDENNNT");
+            System.out.println("Trop évident");
         }
         else if (nbValPoss[i][j] > 2) {
             penalite++;
