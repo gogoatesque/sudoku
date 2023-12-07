@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.BufferedReader; 
 import java.io.FileReader; 
 
-public class SudokuBase {
+public class Sudoku {
 
     private static Scanner scanner = new Scanner(System.in);
     //.........................................................................
