@@ -272,6 +272,7 @@ public class SudokuBase {
 		}
 	    }
         if (trou > nbTrous) {System.out.println("Attention il y a trop de trous ! Veuillez corriger");}
+        if (trou < nbTrous) {System.out.println("Attention il n'y a pas assez de trous ! Veuillez corriger");}
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -375,7 +376,7 @@ public class SudokuBase {
         int nbTrous = saisirEntierMinMax(0, 81);
         initGrilleComplete(gSecret);
         initGrilleIncomplete(nbTrous, gSecret, gHumain);
-        /*saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille1.txt");*/
+        /*saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille2.txt");*/
         saisirGrilleIncomplete(nbTrous, gOrdi);
         initPossibles(gOrdi, valPossibles, nbValPoss);
         return nbTrous;
@@ -521,8 +522,8 @@ public class SudokuBase {
         int nbTrous = initPartie(gSecret, gHumain, gOrdi, valPossibles, nbValPoss);
         int penaliteHumain = 0;
         int penaliteOrdi = 0;
-        afficheGrille(3, gOrdi);
         afficheGrille(3, gHumain);
+        afficheGrille(3, gOrdi);
         for (int i = 0; i < nbTrous; i++) {
             penaliteHumain += tourHumain(gSecret, gHumain);
             afficheGrille(3, gHumain);

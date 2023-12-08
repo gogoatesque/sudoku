@@ -272,6 +272,7 @@ public class Sudoku {
 		}
 	    }
         if (trou > nbTrous) {System.out.println("Attention il y a trop de trous ! Veuillez corriger");}
+        if (trou < nbTrous) {System.out.println("Attention il n'y a pas assez de trous ! Veuillez corriger");}
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -375,7 +376,8 @@ public class Sudoku {
         int nbTrous = saisirEntierMinMax(0, 81);
         initGrilleComplete(gSecret);
         initGrilleIncomplete(nbTrous, gSecret, gHumain);
-        saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille1.txt");
+        /*saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille2.txt");*/
+        saisirGrilleIncomplete(nbTrous, gOrdi);
         initPossibles(gOrdi, valPossibles, nbValPoss);
         return nbTrous;
     }
@@ -494,13 +496,13 @@ public class Sudoku {
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             System.out.println("Trop évident");
         }
-        else if (nbValPoss[i][j] > 2) {
+        else if (nbValPoss[i][j] > 3) {
             penalite++;
             gOrdi[i][j] = nombre;
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             System.out.println("Pénalité ! L'ordinateur a pris un joker");
         }
-        else if (nbValPoss[i][j] == 2) {
+        else if ((nbValPoss[i][j] == 2) || (nbValPoss[i][j] == 3)) {
             System.out.println("L'ordinateur a choisi" + nombre + "est-ce correct ? Tapez 1 pour oui et 0 pour non");
             int reponse = saisirEntierMinMax(0,1);
             if (reponse == 1) {
@@ -533,8 +535,8 @@ public class Sudoku {
         int nbTrous = initPartie(gSecret, gHumain, gOrdi, valPossibles, nbValPoss);
         int penaliteHumain = 0;
         int penaliteOrdi = 0;
-        afficheGrille(3, gOrdi);
         afficheGrille(3, gHumain);
+        afficheGrille(3, gOrdi);
         for (int i = 0; i < nbTrous; i++) {
             penaliteHumain += tourHumain(gSecret, gHumain);
             afficheGrille(3, gHumain);
