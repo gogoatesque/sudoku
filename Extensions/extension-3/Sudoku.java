@@ -31,21 +31,21 @@ public class Sudoku {
     }
 
     public static int[] pull() {
-        if (estVide()) return null;
+        if (valremplie == 0) return null;
         else {
             int [] trou = {tabTrous[valremplie][0],tabTrous[valremplie][1]};
             return trou;
         }
     }
 
-    public static boolean estVide() {
+    /*public static boolean estVide() {
         int ligne = 0;
         boolean autreQueZero = false;
         while (ligne <= 82 && !autreQueZero) {
             if (tabTrous[ligne][0] != 0 || tabTrous[ligne][1] != 0) {autreQueZero = true;}
         }
         return !autreQueZero;
-    }
+    }*/
 
     /** pré-requis : min <= max
      *  résultat :   un entier saisi compris entre min et max, avec re-saisie éventuelle jusqu'à ce qu'il le soit
@@ -411,9 +411,10 @@ public class Sudoku {
         int nbTrous = saisirEntierMinMax(0, 81);
         initGrilleComplete(gSecret);
         initGrilleIncomplete(nbTrous, gSecret, gHumain);
-        /*saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille1.txt");*/
-        saisirGrilleIncomplete(nbTrous, gOrdi);
+        saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille1.txt");
+        /*saisirGrilleIncomplete(nbTrous, gOrdi);*/
         initPossibles(gOrdi, valPossibles, nbValPoss);
+        chercheTrou(gOrdi, nbValPoss);
         return nbTrous;
     }
 	
@@ -434,10 +435,10 @@ public class Sudoku {
         boolean Check = false;
         while (!Check) {
             System.out.print("Entrez une ligne : ");
-            int L = scanner.nextInt();
+            int L = saisirEntierMinMax(1, 9);
             L--;; //Correction d'indice
             System.out.print("Entrez une colonne : ");
-            int C = scanner.nextInt();
+            int C = saisirEntierMinMax(1, 9);
             C--; //Correction d'indice
             if (gHumain[L][C] == 0) {
                 System.out.println("Voulez vous remplir ou joker? ");
@@ -476,19 +477,15 @@ public class Sudoku {
      */
     public static void chercheTrou(int[][] gOrdi,int [][] nbValPoss){
 	//___________________________________________________________________
-
-        boolean trouve = false;
         int i = 0;
         int j = 0;
-        int [] coord = new int [2];
         while (i < gOrdi.length) {
             while (j < gOrdi[i].length) {
                 if(gOrdi[i][j] == 0 && nbValPoss[i][j] > 1) {
-                    coord[0] = i;
-                    coord[1] = j;
+                    int [] coord = {i,j};
                     push(coord);
                 }
-                else j++;
+                j++;
             }
             j = 0;
             i++;
@@ -498,11 +495,10 @@ public class Sudoku {
         while (i < gOrdi.length) {
             while (j < gOrdi[i].length) {
                 if(gOrdi[i][j] == 0 && nbValPoss[i][j] == 1) {
-                    coord[0] = i;
-                    coord[1] = j;
+                    int [] coord = {i,j};
                     push(coord);
                 }
-                else j++;
+                j++;
             }
             j = 0;
             i++;

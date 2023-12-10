@@ -399,10 +399,10 @@ public class SudokuBase {
         boolean Check = false;
         while (!Check) {
             System.out.print("Entrez une ligne : ");
-            int L = scanner.nextInt();
+            int L = saisirEntierMinMax(1, 9);
             L--;; //Correction d'indice
             System.out.print("Entrez une colonne : ");
-            int C = scanner.nextInt();
+            int C = saisirEntierMinMax(1, 9);
             C--; //Correction d'indice
             if (gHumain[L][C] == 0) {
                 System.out.println("Voulez vous remplir ou joker? ");
