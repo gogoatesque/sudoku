@@ -9,21 +9,43 @@ public class Sudoku {
     private static Scanner scanner = new Scanner(System.in);
     
     public static int[][] tabTrous = new int[82][2];
+    public static int valremplie = 0;
 
     //.........................................................................
     // Fonctions utiles
     //.........................................................................
 
-    public static boolean push(int[][] trou) {
-        int valremplie = 0;
-        for (int ligne = 1; ligne <= 82; ligne ++) {
-            if (trou[ligne][0] == 0 && trou[ligne][1] == 0) {
-                
+    public static boolean push(int[] trou) {
+        tabTrous[0][0] = ++valremplie;
+        boolean mis = false;
+        int ligne = 1;
+        while (ligne < 82 && !mis && trou.length == 2) {
+            if (tabTrous[ligne][0] == 0 && tabTrous[ligne][1] == 0) {
+                tabTrous[ligne][0] = trou[0];
+                tabTrous[ligne][1] = trou[1];
+                mis = true;
             }
+            ligne++;
+        }
+        return mis;
+    }
+
+    public static int[] pull() {
+        if (estVide()) return null;
+        else {
+            int [] trou = {tabTrous[valremplie][0],tabTrous[valremplie][1]};
+            return trou;
         }
     }
 
-
+    public static boolean estVide() {
+        int ligne = 0;
+        boolean autreQueZero = false;
+        while (ligne <= 82 && !autreQueZero) {
+            if (tabTrous[ligne][0] != 0 || tabTrous[ligne][1] != 0) {autreQueZero = true;}
+        }
+        return !autreQueZero;
+    }
 
     /** pré-requis : min <= max
      *  résultat :   un entier saisi compris entre min et max, avec re-saisie éventuelle jusqu'à ce qu'il le soit
@@ -389,7 +411,7 @@ public class Sudoku {
         int nbTrous = saisirEntierMinMax(0, 81);
         initGrilleComplete(gSecret);
         initGrilleIncomplete(nbTrous, gSecret, gHumain);
-        /*saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille2.txt");*/
+        /*saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille1.txt");*/
         saisirGrilleIncomplete(nbTrous, gOrdi);
         initPossibles(gOrdi, valPossibles, nbValPoss);
         return nbTrous;
@@ -452,42 +474,39 @@ public class Sudoku {
      *                s'il y en a, sinon le premier trou de gOrdi dans l'ordre des lignes
      * 
      */
-    public static int[] chercheTrou(int[][] gOrdi,int [][] nbValPoss){
+    public static void chercheTrou(int[][] gOrdi,int [][] nbValPoss){
 	//___________________________________________________________________
 
         boolean trouve = false;
         int i = 0;
         int j = 0;
         int [] coord = new int [2];
-        while (!trouve && i < gOrdi.length) {
-            while (!trouve && j < gOrdi[i].length) {
-                if(gOrdi[i][j] == 0 && nbValPoss[i][j] == 1) {
-                    trouve = true;
-                    coord[0] = i;
-                    coord[1] = j;
-                }
-                else j++;
-            }
-            j = 0;
-            i++;
-        }
-        if (trouve == false) {
-            i = 0;
-            j = 0;
-        }
-        while (!trouve && i < gOrdi.length) {
-            while (!trouve && j < gOrdi[i].length) {
+        while (i < gOrdi.length) {
+            while (j < gOrdi[i].length) {
                 if(gOrdi[i][j] == 0 && nbValPoss[i][j] > 1) {
-                    trouve = true;
                     coord[0] = i;
                     coord[1] = j;
+                    push(coord);
                 }
                 else j++;
             }
             j = 0;
             i++;
         }
-        return coord;
+        i = 0;
+        j = 0;
+        while (i < gOrdi.length) {
+            while (j < gOrdi[i].length) {
+                if(gOrdi[i][j] == 0 && nbValPoss[i][j] == 1) {
+                    coord[0] = i;
+                    coord[1] = j;
+                    push(coord);
+                }
+                else j++;
+            }
+            j = 0;
+            i++;
+        }
     }  // fin chercheTrou
 
     //.........................................................................
@@ -500,14 +519,14 @@ public class Sudoku {
     public static int tourOrdinateur(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
         int penalite = 0;
-        int [] trouEvident = chercheTrou(gOrdi, nbValPoss);
+        int [] trouEvident = pull();
         int i = trouEvident[0];
         int j = trouEvident[1];
         int nombre = uneValeur(valPossibles[i][j]);
         if (nbValPoss[i][j] == 1) {
             gOrdi[i][j] = nombre;
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
-            System.out.println("Trop évident");
+            System.out.println("Trou évident");
         }
         else if (nbValPoss[i][j] > 3) {
             penalite++;
@@ -577,11 +596,10 @@ public class Sudoku {
      *               et affiche qui a gagné
      */
     public static void main(String[] args){
-        /*int gagnant = partie();
+        int gagnant = partie();
         if (gagnant == 0) System.out.println("C'est un match nul !");
         else if (gagnant == 1) System.out.println("L'humain a gagné !");
-        else System.out.println("L'ordinateur a gagné !");*/
-        afficherMatrice(tabTrous);
+        else System.out.println("L'ordinateur a gagné !");
      // fin main
     }
 } // fin SudokuBase
