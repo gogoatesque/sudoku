@@ -490,7 +490,7 @@ public class Sudoku {
      */
     public static void chercheTrou(int[][] gOrdi,int [][] nbValPoss){
 	//___________________________________________________________________
-        int i = 0;
+        /*int i = 0;
         int j = 0;
         while (i < gOrdi.length) {
             while (j < gOrdi[i].length) {
@@ -502,7 +502,7 @@ public class Sudoku {
             }
             j = 0;
             i++;
-        }
+        }*/
         i = 0;
         j = 0;
         while (i < gOrdi.length) {
@@ -528,6 +528,9 @@ public class Sudoku {
     public static int tourOrdinateur(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
         int penalite = 0;
+        if (valremplie == 0) {
+            chercheTrou(gOrdi, nbValPoss);
+        }
         int [] trouEvident = pull();
         int i = trouEvident[0];
         int j = trouEvident[1];
@@ -537,21 +540,14 @@ public class Sudoku {
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             System.out.println("Trou évident");
         }
-        else if (nbValPoss[i][j] > 3) {
+        else if (nbValPoss[i][j] > 1) {
             penalite++;
-            gOrdi[i][j] = nombre;
-            suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             System.out.println("Pénalité ! L'ordinateur a pris un joker");
+            System.out.println("Saisissez la valeur correcte pour l'ordinateur à la ligne " + (i+1) + " et colonne " + (j+1));
+            nombre = saisirEntierMinMax(1,9);
+            gOrdi[i][j] = nombre;
         }
-        else if ((nbValPoss[i][j] == 2) || (nbValPoss[i][j] == 3)) {
-            System.out.println("L'ordinateur a choisi" + nombre + "est-ce correct ? Tapez 1 pour oui et 0 pour non");
-            int reponse = saisirEntierMinMax(0,1);
-            if (reponse == 1) {
-                gOrdi[i][j] = nombre;
-                suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
-            }
-            else if (reponse == 0) {penalite++;}
-        }
+        suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
         return penalite;
     }  // fin tourOrdinateur
 

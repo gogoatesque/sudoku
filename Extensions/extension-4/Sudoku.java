@@ -504,8 +504,10 @@ public class Sudoku {
         if (nbValPoss[i][j] == 1) {gOrdi[i][j] = nombre;}
         else if (nbValPoss[i][j] > 1) {
             penalite++;
-            gOrdi[i][j] = nombre;
             System.out.println("Pénalité ! L'ordinateur a pris un joker");
+            System.out.println("Saisissez la valeur correcte pour l'ordinateur à la ligne " + (i+1) + " et colonne " + (j+1));
+            nombre = saisirEntierMinMax(1,9);
+            gOrdi[i][j] = nombre;
         }
         suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
         return penalite;

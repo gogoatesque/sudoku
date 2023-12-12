@@ -506,11 +506,13 @@ public class Sudoku {
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             System.out.println("Trop évident");
         }
-        else if (nbValPoss[i][j] > 3) {
+        else if (nbValPoss[i][j] > 1) {
             penalite++;
+            System.out.println("Pénalité ! L'ordinateur a pris un joker");
+            System.out.println("Saisissez la valeur correcte pour l'ordinateur à la ligne " + (i+1) + " et colonne " + (j+1));
+            nombre = saisirEntierMinMax(1,9);
             gOrdi[i][j] = nombre;
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
-            System.out.println("Pénalité ! L'ordinateur a pris un joker");
         }
         else if ((nbValPoss[i][j] == 2) || (nbValPoss[i][j] == 3)) {
             System.out.println("L'ordinateur a choisi" + nombre + "est-ce correct ? Tapez 1 pour oui et 0 pour non");
