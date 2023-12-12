@@ -228,16 +228,26 @@ public class Sudoku {
 	//_________________________________________________
         int trou = 0;
         int k = 0;
+        int remplis = 0;
         for (int i = 0; i < g.length; i++) {
             for (int j = 0; j < g[i].length; j++) {
-                if (trou < nbTrous) {
-                    k = saisirEntierMinMax(0,9);
-                    g[i][j] = k;
-                    if (k == 0) trou++;
+                int restant = g.length*g.length - remplis;
+                if(restant == nbTrous - trou) {
+                    g[i][j] = 0;
+                    remplis++;
+                    trou++;
                 }
-                else if (trou == nbTrous){
-                    k = saisirEntierMinMax(1,9);
-                    g[i][j] = k;
+                else {
+                    if (trou < nbTrous) {
+                        k = saisirEntierMinMax(0,9);
+                        g[i][j] = k;
+                        if (k == 0) trou++;
+                    }
+                    else if (trou == nbTrous){
+                            k = saisirEntierMinMax(1,9);
+                            g[i][j] = k;
+                    }
+                    remplis++;
                 }
             }
         }
