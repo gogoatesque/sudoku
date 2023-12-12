@@ -542,6 +542,7 @@ public class Sudoku {
         int [][] gOrdi = new int [9][9];
         boolean [][][] valPossibles = new boolean [9][9][10];
         int [][] nbValPoss = new int [9][9];
+        System.out.println("Bienvenue dans le sudoku, choisissez le nombre de trous");
         int nbTrous = initPartie(gSecret, gHumain, gOrdi, valPossibles, nbValPoss);
         int penaliteHumain = 0;
         int penaliteOrdi = 0;

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.BufferedReader; 
 import java.io.FileReader; 
 
-public class SudokuBase {
+public class Sudoku {
 
     private static Scanner scanner = new Scanner(System.in);
     //.........................................................................
@@ -529,6 +529,7 @@ public class SudokuBase {
         int [][] gOrdi = new int [9][9];
         boolean [][][] valPossibles = new boolean [9][9][10];
         int [][] nbValPoss = new int [9][9];
+        System.out.println("Bienvenue dans le sudoku, choisissez le nombre de trous");
         int nbTrous = initPartie(gSecret, gHumain, gOrdi, valPossibles, nbValPoss);
         int penaliteHumain = 0;
         int penaliteOrdi = 0;
@@ -548,8 +549,8 @@ public class SudokuBase {
     //.........................................................................
 
     public static void rotation90(int [][] grille, int [][] transfo) {
-        for (i = 0, i < g.length; i++) {
-            for (j = 0; j < g[i].length; j++) {
+        for (int i = 0; i < grille.length; i++) {
+            for (int j = 0; j < grille[i].length; j++) {
                 transfo[i][j] = grille[j][8-i];
             }
         }
@@ -557,8 +558,8 @@ public class SudokuBase {
     }
 
     public static void symétrieHorizontale(int [][] grille, int [][] transfo) {
-        for (i = 0, i < g.length; i++) {
-            for (j = 0; j < g[i].length; j++) {
+        for (int i = 0; i < grille.length; i++) {
+            for (int j = 0; j < grille[i].length; j++) {
                 transfo[i][j] = grille[8-i][j];
             }
         }
@@ -566,12 +567,40 @@ public class SudokuBase {
     }
 
     public static void symétrieDiagonale(int [][] grille, int [][] transfo) {
-        for (i = 0, i < g.length; i++) {
-            for (j = 0; j < g[i].length; j++) {
+        for (int i = 0; i < grille.length; i++) {
+            for (int j = 0; j < grille[i].length; j++) {
                 transfo[i][j] = grille[8-i][8-j];
             }
         }
         copieMatrice(transfo, grille);
+    }
+
+    public static void échangeLignes(int[][] grille, int[][] transfo) {
+        copieMatrice(grille, transfo);
+        int ligne = Ut.randomMinMax(0,8);
+        int [] deb = debCarre(3, ligne, 0);
+        int debLigne = deb[0];
+        int ligne2 = ligne;
+        while (ligne == ligne2) {
+            ligne2 = Ut.randomMinMax(debLigne, debLigne + 2);
+        }
+        for (int j = 0; j < grille.length; j++) {
+            transfo[ligne][j] = grille[ligne2][j];
+            transfo[ligne2][j] = grille[ligne][j];
+        }
+        copieMatrice(transfo, grille);
+    }
+
+    public static void modifierGrilleAlea(int [][] grille, int[][] transfo) {
+        int nbrepet = Ut.randomMinMax(2,20);
+        for (int i = 1; i <= nbrepet; i++) {
+            int nombre = Ut.randomMinMax(1,4);
+            if (nombre == 1) rotation90(grille, transfo);
+            else if (nombre == 2) symétrieHorizontale(grille, transfo);
+            else if (nombre == 3) symétrieDiagonale(grille, transfo);
+            else échangeLignes(grille, transfo);
+        }
+        System.out.println("Grille modifiée Aléatoirement");
     }
     /** pré-requis : aucun
      *  action :     effectue une partie de Sudoku entre le joueur humain et l'ordinateur
