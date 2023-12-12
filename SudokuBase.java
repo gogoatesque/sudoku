@@ -386,8 +386,8 @@ public class SudokuBase {
         int nbTrous = saisirEntierMinMax(0, 81);
         initGrilleComplete(gSecret);
         initGrilleIncomplete(nbTrous, gSecret, gHumain);
-        saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille2.txt");
-        /*saisirGrilleIncomplete(nbTrous, gOrdi);*/
+        /*saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille2.txt");*/
+        saisirGrilleIncomplete(nbTrous, gOrdi);
         initPossibles(gOrdi, valPossibles, nbValPoss);
         return nbTrous;
     }
