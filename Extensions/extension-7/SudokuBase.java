@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.BufferedReader; 
 import java.io.FileReader; 
 
-public class SudokuBase {
+public class Sudoku {
 
     private static Scanner scanner = new Scanner(System.in);
     //.........................................................................
@@ -344,8 +344,52 @@ public class SudokuBase {
     }// fin suppValPoss
 
 
-    //.........................................................................
+    //..................................Méthodes nécessaires à l'extension 3.7 avec k = 2.......................................
+    public static int[] QuellesValeurs(boolean[] T1){
+        //doit retourner un tableau avec les valeurs possibles d'un Trou a partir de son tableau de booleen
+        int[] Val = new int[0];
+        int k = 0;
+        for(boolean element:T1){
+            if(element) Val[k] = k;
+            k++;
+        }
+        return Val;
+    }
 
+    public static void suppValPoss2(int [][] gOrdi, int[] TabVal, int i1, int j1, int j2, boolean[][][] valPossibles, int [][]nbValPoss){
+    //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
+        for(int element:TabVal){
+            int nb = element;
+            //modif sur la ligne
+            for (int a = 0; a < gOrdi.length; a++) {
+                if ((a != j1)&&(a != j2)){
+                    if (gOrdi[i1][a] == 0 && supprime(valPossibles[i1][a], nb)) {
+                        nbValPoss[i1][a] -= 1;
+                    }
+                }
+            }
+            //modif sur la colonne
+            for (int b = 0; b < gOrdi.length; b++) {
+                if (b != i1){
+                    if (gOrdi[b][j1] == 0 && supprime(valPossibles[b][j1], nb)) {
+                        nbValPoss[b][j1] -= 1;
+                    }
+                }
+            }
+            //modif carré
+            int [] tablo = debCarre(3, i1, j1);
+            for (int a = tablo[0]; a <= (tablo[0]+2); a++) {
+                for (int b = tablo[1]; b <= (tablo[1]+2); b++) {
+                    if((a != i1)&&(b != j1)){
+                        if (gOrdi[a][b] == 0 && supprime(valPossibles[a][b], nb)) {
+                            nbValPoss[a][b] -= 1;
+                        }
+                    }
+                }
+            }        
+        }
+    }
+    //.........................................................................
     /** pré-requis : gOrdi est une grille de Sudoju incomplète,
      *               valPossibles est une matrice 9x9 de tableaux de 10 booléens
      *               et nbValPoss est une matrice 9x9 d'entiers
@@ -361,7 +405,21 @@ public class SudokuBase {
         for(int i = 0; i < n; i++){ //Supprime les valeurs pas possibles
             for(int j = 0; j < n; j++){
                 if (gOrdi[i][j] != 0) suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
-
+            }
+        }
+        /**********************EXTENSION avec k = 2**********************/
+        for(int i = 0; i < n; i++){ 
+            for(int j1 = 0; j1 < n-1; j1++){
+                if(nbValPoss[i][j1]==2){
+                    for(int j2 = j1+1; j2 < n; j2++){
+                        if(nbValPoss[i][j2]==2){
+                            if(Arrays.equals(valPossibles[i][j1], valPossibles[i][j2])){
+                                int [] TabVal = QuellesValeurs(valPossibles[i][j1]);
+                                suppValPoss2(gOrdi, TabVal, i, j1, j2, valPossibles, nbValPoss);
+                            }
+                        }
+                    }
+                }
             }
         }
     }  // fin initPossibles
