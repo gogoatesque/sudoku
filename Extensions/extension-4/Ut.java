@@ -1,5 +1,6 @@
 // dmaj : fin octobre 2020
 // version un peu modifiée pour mes sondages 9/2023
+// et encore le 30/11 (ajout 'public static int lireProchainEntier()' )
 
 import java.util.*;
 import java.lang.*;
@@ -8,6 +9,9 @@ public class Ut {
 
     private static Scanner clavier=new Scanner(System.in);
  
+    public static String lireProchainMot(){// JP 13/12/2023
+        return clavier.next();
+    }
     
     public static void afficher (String ch) {
         System.out.print(ch);
@@ -92,6 +96,11 @@ public class Ut {
             return saisirEntier(); // ou System.exit(1)
         }
         return lu;
+    }
+
+    /* NOUVELLE */
+    public static int lireProchainEntier(){
+        return clavier.nextInt();
     }
     
     public static double saisirDouble () {

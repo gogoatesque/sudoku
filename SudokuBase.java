@@ -274,15 +274,15 @@ public class SudokuBase {
 		for (int j = 0 ; j < 9 ; j++) {
             int valeur = Integer.parseInt(valeurs[j]);
                 if (valeur < 0 || valeur > 9) {
-                    System.out.println("Erreur : La valeur doit être entre 0 et 9 inclus");
+                    throw new IOException("Erreur : La valeur doit être entre 0 et 9 inclus");
                     return;
                 }
 		    g[i][j] = valeur;
             if (valeur == 0) {trou++;}
 		}
 	    }
-        if (trou > nbTrous) {System.out.println("Attention il y a trop de trous ! Veuillez corriger");}
-        if (trou < nbTrous) {System.out.println("Attention il n'y a pas assez de trous ! Veuillez corriger");}
+        if (trou > nbTrous) {throw new IOException("Attention il y a trop de trous ! Veuillez corriger");}
+        if (trou < nbTrous) {throw new IOException("Attention il n'y a pas assez de trous ! Veuillez corriger");}
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

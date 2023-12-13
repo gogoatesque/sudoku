@@ -506,7 +506,7 @@ public class Sudoku {
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             System.out.println("Trop évident");
         }
-        else if (nbValPoss[i][j] > 1) {
+        else if (nbValPoss[i][j] > 3) {
             penalite++;
             System.out.println("Pénalité ! L'ordinateur a pris un joker");
             System.out.println("Saisissez la valeur correcte pour l'ordinateur à la ligne " + (i+1) + " et colonne " + (j+1));
@@ -515,13 +515,13 @@ public class Sudoku {
             suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
         }
         else if ((nbValPoss[i][j] == 2) || (nbValPoss[i][j] == 3)) {
-            System.out.println("L'ordinateur a choisi" + nombre + "est-ce correct ? Tapez 1 pour oui et 0 pour non");
-            int reponse = saisirEntierMinMax(0,1);
-            if (reponse == 1) {
+            System.out.println("L'ordinateur a choisi" + nombre + "est-ce correct ? Tapez 'oui' ou 'non' ");
+            String reponse = Ut.lireProchainMot();
+            if (reponse == 'oui') {
                 gOrdi[i][j] = nombre;
                 suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             }
-            else if (reponse == 0) {penalite++;}
+            else if (reponse == 'non') {penalite++;}
         }
         return penalite;
     }  // fin tourOrdinateur
