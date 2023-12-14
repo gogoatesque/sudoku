@@ -530,7 +530,7 @@ public class Sudoku {
     public static int tourOrdinateur(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
         int penalite = 0;
-        if (pull() == null) {
+        if (valremplie == 0) {
             chercheTrouEvident(gOrdi, nbValPoss);
         }
         int [] trouEvident = pull();
