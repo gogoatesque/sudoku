@@ -76,7 +76,7 @@ public class Sudoku {
 	//_____________________________________________
         boolean trouve = false;
         int i = 1;
-        while (i < ens.length && trouve == false) {
+        while (i < ens.length && !trouve) {
             if (ens[i]) trouve = true;
             else i++;
         }
@@ -468,7 +468,7 @@ public class Sudoku {
         while (!Check) {
             System.out.print("Entrez une ligne : ");
             int L = saisirEntierMinMax(1, 9);
-            L--;; //Correction d'indice
+            L--; //Correction d'indice
             System.out.print("Entrez une colonne : ");
             int C = saisirEntierMinMax(1, 9);
             C--; //Correction d'indice
@@ -526,7 +526,7 @@ public class Sudoku {
             j = 0;
             i++;
         }
-        if (trouve == false) {
+        if (!trouve) {
             i = 0;
             j = 0;
         }

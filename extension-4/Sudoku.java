@@ -76,7 +76,7 @@ public class Sudoku {
 	//_____________________________________________
         boolean trouve = false;
         int i = 1;
-        while (i < ens.length && trouve == false) {
+        while (i < ens.length && !trouve) {
             if (ens[i]) trouve = true;
             else i++;
         }
@@ -410,7 +410,7 @@ public class Sudoku {
         while (!Check) {
             System.out.print("Entrez une ligne : ");
             int L = saisirEntierMinMax(1, 9);
-            L--;; //Correction d'indice
+            L--; //Correction d'indice
             System.out.print("Entrez une colonne : ");
             int C = saisirEntierMinMax(1, 9);
             C--; //Correction d'indice
@@ -468,7 +468,7 @@ public class Sudoku {
             j = 0;
             i++;
         }
-        if (trouve == false) {
+        if (!trouve) {
             i = 0;
             j = 0;
         }
@@ -559,7 +559,7 @@ public class Sudoku {
         copieMatrice(transfo, grille);
     }
 
-    public static void symétrieHorizontale(int [][] grille, int [][] transfo) {
+    public static void symetrieHorizontale(int [][] grille, int [][] transfo) {
         for (int i = 0; i < grille.length; i++) {
             for (int j = 0; j < grille[i].length; j++) {
                 transfo[i][j] = grille[8-i][j];
@@ -568,7 +568,7 @@ public class Sudoku {
         copieMatrice(transfo, grille);
     }
 
-    public static void symétrieDiagonale(int [][] grille, int [][] transfo) {
+    public static void symetrieDiagonale(int [][] grille, int [][] transfo) {
         for (int i = 0; i < grille.length; i++) {
             for (int j = 0; j < grille[i].length; j++) {
                 transfo[i][j] = grille[8-i][8-j];
@@ -577,7 +577,7 @@ public class Sudoku {
         copieMatrice(transfo, grille);
     }
 
-    public static void échangeLignes(int[][] grille, int[][] transfo) {
+    public static void echangeLignes(int[][] grille, int[][] transfo) {
         copieMatrice(grille, transfo);
         int ligne = Ut.randomMinMax(0,8);
         int [] deb = debCarre(3, ligne, 0);
@@ -598,9 +598,9 @@ public class Sudoku {
         for (int i = 1; i <= nbrepet; i++) {
             int nombre = Ut.randomMinMax(1,4);
             if (nombre == 1) rotation90(grille, transfo);
-            else if (nombre == 2) symétrieHorizontale(grille, transfo);
-            else if (nombre == 3) symétrieDiagonale(grille, transfo);
-            else échangeLignes(grille, transfo);
+            else if (nombre == 2) symetrieHorizontale(grille, transfo);
+            else if (nombre == 3) symetrieDiagonale(grille, transfo);
+            else echangeLignes(grille, transfo);
         }
         System.out.println("Grille modifiée Aléatoirement");
     }
