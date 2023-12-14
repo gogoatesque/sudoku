@@ -490,7 +490,7 @@ public class Sudoku {
      */
     public static void chercheTrou(int[][] gOrdi,int [][] nbValPoss){
 	//___________________________________________________________________
-        /*int i = 0;
+        int i = 0;
         int j = 0;
         while (i < gOrdi.length) {
             while (j < gOrdi[i].length) {
@@ -502,9 +502,9 @@ public class Sudoku {
             }
             j = 0;
             i++;
-        }*/
-        int i = 0;
-        int j = 0;
+        }
+        i = 0;
+        j = 0;
         while (i < gOrdi.length) {
             while (j < gOrdi[i].length) {
                 if(gOrdi[i][j] == 0 && nbValPoss[i][j] == 1) {
@@ -528,7 +528,7 @@ public class Sudoku {
     public static int tourOrdinateur(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
 	//________________________________________________________________________________________________
         int penalite = 0;
-        if (valremplie == 0) {
+        if (pull() == null) {
             chercheTrou(gOrdi, nbValPoss);
         }
         int [] trouEvident = pull();
