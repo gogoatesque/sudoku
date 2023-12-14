@@ -427,7 +427,7 @@ public class Sudoku {
         saisirGrilleIncompleteFichier(nbTrous, gOrdi, "grille1.txt");
         /*saisirGrilleIncomplete(nbTrous, gOrdi);*/
         initPossibles(gOrdi, valPossibles, nbValPoss);
-        chercheTrou(gOrdi, nbValPoss);
+        chercheTrouEvident(gOrdi, nbValPoss);
         return nbTrous;
     }
 	
@@ -485,24 +485,9 @@ public class Sudoku {
     /** pré-requis : gOrdi et nbValPoss sont des matrices 9x9
      *  résultat :   le premier trou (i,j) de gOrdi (c'est-à-dire tel que gOrdi[i][j]==0)
      *               évident (c'est-à-dire tel que nbValPoss[i][j]==1) dans l'ordre des lignes,
-     *                s'il y en a, sinon le premier trou de gOrdi dans l'ordre des lignes
      * 
      */
-    public static void chercheTrou(int[][] gOrdi,int [][] nbValPoss){
-	//___________________________________________________________________
-        /*int i = 0;
-        int j = 0;
-        while (i < gOrdi.length) {
-            while (j < gOrdi[i].length) {
-                if(gOrdi[i][j] == 0 && nbValPoss[i][j] > 1) {
-                    int [] coord = {i,j};
-                    push(coord);
-                }
-                j++;
-            }
-            j = 0;
-            i++;
-        }*/
+    public static void chercheTrouEvident(int[][] gOrdi,int [][] nbValPoss){
         int i = 0;
         int j = 0;
         while (i < gOrdi.length) {
@@ -515,6 +500,23 @@ public class Sudoku {
             }
             j = 0;
             i++;
+        }
+        if (valremplie == 0) { //si il n'y a pas de trous évidents même après avoir cherché de nouveaux trous, push un trou pas évident
+            i = 0;
+            j = 0;
+            boolean trouve = false;
+            while (i < gOrdi.length && !trouve) {
+                while (j < gOrdi[i].length && !trouve) {
+                    if(gOrdi[i][j] == 0 && nbValPoss[i][j] > 1) {
+                        int [] coord = {i,j};
+                        push(coord);
+                        trouve = true;
+                    }
+                    j++;
+                }
+                j = 0;
+                i++;
+            }
         }
     }  // fin chercheTrou
 
@@ -529,7 +531,7 @@ public class Sudoku {
 	//________________________________________________________________________________________________
         int penalite = 0;
         if (pull() == null) {
-            chercheTrou(gOrdi, nbValPoss);
+            chercheTrouEvident(gOrdi, nbValPoss);
         }
         int [] trouEvident = pull();
         int i = trouEvident[0];
