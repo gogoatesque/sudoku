@@ -517,11 +517,11 @@ public class Sudoku {
         else if ((nbValPoss[i][j] == 2) || (nbValPoss[i][j] == 3)) {
             System.out.println("L'ordinateur a choisi" + nombre + "est-ce correct ? Tapez 'oui' ou 'non' ");
             String reponse = Ut.lireProchainMot();
-            if (reponse == 'oui') {
+            if (reponse == "oui") {
                 gOrdi[i][j] = nombre;
                 suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             }
-            else if (reponse == 'non') {penalite++;}
+            else if (reponse == "non") {penalite++;}
         }
         return penalite;
     }  // fin tourOrdinateur
