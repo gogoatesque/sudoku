@@ -356,7 +356,7 @@ public class Sudoku {
         return Val;
     }
 
-    public static void suppValPoss2(int [][] gOrdi, int[] TabVal, int i1, int j1, int j2, boolean[][][] valPossibles, int [][]nbValPoss){
+    public static void suppValPoss2Ligne(int [][] gOrdi, int[] TabVal, int i1, int j1, int j2, boolean[][][] valPossibles, int [][]nbValPoss){
     //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
         for(int element:TabVal){
             int nb = element;
@@ -367,20 +367,34 @@ public class Sudoku {
                         nbValPoss[i1][a] -= 1;
                     }
                 }
-            }
+            }      
+        }
+    }
+
+    public static void suppValPoss2Colonne(int [][] gOrdi, int[] TabVal, int j1, int i1, int i2, boolean[][][] valPossibles, int [][]nbValPoss){
+    //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
+        for(int element:TabVal){
+            int nb = element;
             //modif sur la colonne
             for (int b = 0; b < gOrdi.length; b++) {
-                if (b != i1){
+                if ((b != i1) && (b != i2)){
                     if (gOrdi[b][j1] == 0 && supprime(valPossibles[b][j1], nb)) {
                         nbValPoss[b][j1] -= 1;
                     }
                 }
-            }
+            }       
+        }
+    }
+
+    public static void suppValPoss2Carre(int [][] gOrdi, int[] TabVal, int i1, int j1, int i2, int j2, boolean[][][] valPossibles, int [][]nbValPoss){
+    //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
+        for(int element:TabVal){
+            int nb = element;
             //modif carré
             int [] tablo = debCarre(3, i1, j1);
             for (int a = tablo[0]; a <= (tablo[0]+2); a++) {
                 for (int b = tablo[1]; b <= (tablo[1]+2); b++) {
-                    if((a != i1)&&(b != j1)){
+                    if( ((a != i1)&&(b != j1)) && ((a != i2)&&(b != j2)) ){
                         if (gOrdi[a][b] == 0 && supprime(valPossibles[a][b], nb)) {
                             nbValPoss[a][b] -= 1;
                         }
@@ -408,14 +422,38 @@ public class Sudoku {
             }
         }
         /**********************EXTENSION avec k = 2**********************/
-        for(int i = 0; i < n; i++){ 
+        for(int i1 = 0; i1 < n; i1++){ 
             for(int j1 = 0; j1 < n-1; j1++){
-                if(nbValPoss[i][j1]==2){
+                if(nbValPoss[i1][j1]==2){
+                    //parcours de la ligne en quête d'un autre trou
                     for(int j2 = j1+1; j2 < n; j2++){
-                        if(nbValPoss[i][j2]==2){
-                            if(Arrays.equals(valPossibles[i][j1], valPossibles[i][j2])){
-                                int [] TabVal = QuellesValeurs(valPossibles[i][j1]);
-                                suppValPoss2(gOrdi, TabVal, i, j1, j2, valPossibles, nbValPoss);
+                        if(nbValPoss[i1][j2]==2){
+                            if(Arrays.equals(valPossibles[i1][j1], valPossibles[i1][j2])){
+                                int [] TabVal = QuellesValeurs(valPossibles[i1][j1]);
+                                suppValPoss2Ligne(gOrdi, TabVal, i1, j1, j2, valPossibles, nbValPoss);
+                            }
+                        }
+                    }
+                    //parcours de la la colonne en quête d'un autre trou
+                    for(int i2 = i1+1; i1 < n; i2++){
+                        if(nbValPoss[i2][j1]==2){
+                            if(Arrays.equals(valPossibles[i1][j1], valPossibles[i2][j1])){
+                                int [] TabVal = QuellesValeurs(valPossibles[i1][j1]);
+                                suppValPoss2Colonne(gOrdi, TabVal, j1, i1, i2, valPossibles, nbValPoss);
+                            }
+                        }
+                    }
+                    //parcours du carré en quête d'un autre trou
+                    int [] tablo = debCarre(3, i1, j1);
+                    for (int a = tablo[0]; a <= (tablo[0]+2); a++) {
+                        for (int b = tablo[1]; b <= (tablo[1]+2); b++) {
+                            if ((a != i1)&&(b != j1)){
+                                if(nbValPoss[a][b]==2){
+                                    if(Arrays.equals(valPossibles[i1][j1], valPossibles[a][b])){
+                                        int [] TabVal = QuellesValeurs(valPossibles[i1][j1]);
+                                        suppValPoss2Carre(gOrdi, TabVal, i1, j1, a, b, valPossibles, nbValPoss);
+                                    }
+                                }
                             }
                         }
                     }
