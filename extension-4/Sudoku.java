@@ -201,18 +201,21 @@ public class Sudoku {
      *  action :     modifie gIncomplete pour qu'elle corresponde à une version incomplète de la grille de Sudoku gSecret (gIncomplete peut être complétée en gSecret), 
      *               avec nbTrous trous à des positions aléatoires
      */
-    public static void initGrilleIncomplete(int nbTrous, int [][] gSecret, int[][] gIncomplete){
-	//___________________________________________________________________________
-        copieMatrice(gSecret, gIncomplete);
-        for (int i = 1; i <= nbTrous; i++) {
-            int ligne = Ut.randomMinMax(0, gIncomplete.length-1);
-            int colonne = Ut.randomMinMax(0, gIncomplete[ligne].length-1);
-            if (gIncomplete[ligne][colonne] == 0) {
-                i--;
-            }
-            else gIncomplete[ligne][colonne] = 0;
-        }
-    } // fin initGrilleIncomplete
+    public static void initGrilleComplete(int [][] gComplete){
+        int [][] transfo = new int [9][9];
+        int [][] grille =
+                {{6,2,9,7,8,1,3,4,5},
+                        {4,7,3,9,6,5,8,1,2},
+                        {8,1,5,2,4,3,6,9,7},
+                        {9,5,8,3,1,2,4,7,6},
+                        {7,3,2,4,5,6,1,8,9},
+                        {1,6,4,8,7,9,2,5,3},
+                        {3,8,1,5,2,7,9,6,4},
+                        {5,9,6,1,3,4,7,2,8},
+                        {2,4,7,6,9,8,5,3,1}};
+        copieMatrice(grille, gComplete);
+        modifierGrilleAlea(gComplete, transfo);
+    } // fin initGrilleComplete
 	
     //.........................................................................
 
