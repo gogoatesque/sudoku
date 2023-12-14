@@ -12,11 +12,12 @@ public class Sudoku {
     //.........................................................................
 
 
-    /** pré-requis : min <= max
-     *  résultat :   un entier saisi compris entre min et max, avec re-saisie éventuelle jusqu'à ce qu'il le soit
+    /**
+     * pré-requis : min <= max
+     * résultat :   un entier saisi compris entre min et max, avec re-saisie éventuelle jusqu'à ce qu'il le soit
      */
-    public static int saisirEntierMinMax(int min, int max){
-	//________________________________________________________
+    public static int saisirEntierMinMax(int min, int max) {
+        //________________________________________________________
         int k = scanner.nextInt();
         while (k < min || k > max) {
             System.out.print("Saisir une valeur correcte :");
@@ -26,54 +27,59 @@ public class Sudoku {
     }  // fin saisirEntierMinMax
     //.........................................................................
 
-    /** MODIFICI
-     *  pré-requis : mat1 et mat2 ont les mêmes dimensions
-     *  action : copie toutes les valeurs de mat1 dans mat2 de sorte que mat1 et mat2 soient identiques
+    /**
+     * MODIFICI
+     * pré-requis : mat1 et mat2 ont les mêmes dimensions
+     * action : copie toutes les valeurs de mat1 dans mat2 de sorte que mat1 et mat2 soient identiques
      */
-    public static void copieMatrice(int[][] mat1, int[][] mat2){
+    public static void copieMatrice(int[][] mat1, int[][] mat2) {
         for (int i = 0; i < mat1.length; i++) {
             for (int j = 0; j < mat1[i].length; j++) {
-                if (mat2[i][j] != mat1[i][j]) {mat2[i][j] = mat1[i][j];}
+                if (mat2[i][j] != mat1[i][j]) {
+                    mat2[i][j] = mat1[i][j];
+                }
             }
         }
     }  // fin copieMatrice
 
     //.........................................................................
 
-    /** pré-requis :  k >= 0
-     *  résultat : un tableau de booléens représentant le sous-ensemble de l'ensemble des entiers 
-     *             de 1 à k égal à lui-même 
+    /**
+     * pré-requis :  k >= 0
+     * résultat : un tableau de booléens représentant le sous-ensemble de l'ensemble des entiers
+     * de 1 à k égal à lui-même
      */
-    public static boolean[] ensPlein(int k){
-	//_____________________________________
-        boolean[] TBool = new boolean[k+1];
-        for (int i = 0; i <= k; i++){
+    public static boolean[] ensPlein(int k) {
+        //_____________________________________
+        boolean[] TBool = new boolean[k + 1];
+        for (int i = 0; i <= k; i++) {
             TBool[i] = true;
         }
         return TBool;
     }  // fin ensPlein
 
-    /** pré-requis : 1 <= val < ens.length
-     *  action :     supprime la valeur val de l'ensemble représenté par ens, s'il y est
-     *  résultat :   vrai ssi val était dans cet ensemble
+    /**
+     * pré-requis : 1 <= val < ens.length
+     * action :     supprime la valeur val de l'ensemble représenté par ens, s'il y est
+     * résultat :   vrai ssi val était dans cet ensemble
      */
-    public static boolean supprime(boolean[] ens, int val){
+    public static boolean supprime(boolean[] ens, int val) {
         if (ens[val]) {
             ens[val] = false;
             return true;
-        }
-        else return false;
+        } else return false;
     }  // fin supprime
 
 
     //.........................................................................
 
 
-    /** pré-requis : l'ensemble représenté par ens k'est pas vide
-     *  résultat :   un élément de cet ensemble
+    /**
+     * pré-requis : l'ensemble représenté par ens k'est pas vide
+     * résultat :   un élément de cet ensemble
      */
-    public static int uneValeur(boolean[] ens){
-	//_____________________________________________
+    public static int uneValeur(boolean[] ens) {
+        //_____________________________________________
         boolean trouve = false;
         int i = 1;
         while (i < ens.length && !trouve) {
@@ -86,66 +92,68 @@ public class Sudoku {
     //.........................................................................
 
     /**
- 
-       1 2 3 4 5 6 7 8 9
-       ------------------- 
-       1 |6 2 9|7 8 1|3 4 5|
-       2 |4 7 3|9 6 5|8 1 2|
-       3 |8 1 5|2 4 3|6 9 7|
-       ------------------- 
-       4 |9 5 8|3 1 2|4 7 6|
-       5 |7 3 2|4 5 6|1 8 9|
-       6 |1 6 4|8 7 9|2 5 3|
-       ------------------- 
-       7 |3 8 1|5 2 7|9 6 4|
-       8 |5 9 6|1 3 4|7 2 8|
-       9 |2 4 7|6 9 8|5 3 1|
-       ------------------- 
-
- 
-       1 2 3 4 5 6 7 8 9
-       ------------------- 
-       1 |6 0 0|0 0 1|0 4 0|
-       2 |0 0 0|9 6 5|0 1 2|
-       3 |8 1 0|0 4 0|0 0 0|
-       ------------------- 
-       4 |0 5 0|3 0 2|0 7 0|
-       5 |7 0 0|0 0 0|1 8 9|
-       6||0 0 0|0 7 0|0 0 3|
-       ------------------- 
-       7 |3 0 0|0 2 0|9 0 4|
-       8 |0 9 0|0 0 0|7 2 0|
-       9 |2 4 0|6 9 0|0 0 0|
-       ------------------- 
-
-
-       * pré-requis : 0<=k<=3 et g est une grille k^2xk^2 dont les valeurs sont comprises 
-       *              entre 0 et k^2 et qui est partitionnée en k sous-carrés kxk
-       * action : affiche la  grille g avec ses sous-carrés et avec les numéros des lignes 
-       *          et des colonnes de 1 à k^2.
-       * Par exemple, pour k = 3, on obtient le dessin d'une grille de Sudoku
-       *  
-       */
-    public static void afficheGrille(int k,int[][] g){
-	//__________________________________________________
+     * 1 2 3 4 5 6 7 8 9
+     * -------------------
+     * 1 |6 2 9|7 8 1|3 4 5|
+     * 2 |4 7 3|9 6 5|8 1 2|
+     * 3 |8 1 5|2 4 3|6 9 7|
+     * -------------------
+     * 4 |9 5 8|3 1 2|4 7 6|
+     * 5 |7 3 2|4 5 6|1 8 9|
+     * 6 |1 6 4|8 7 9|2 5 3|
+     * -------------------
+     * 7 |3 8 1|5 2 7|9 6 4|
+     * 8 |5 9 6|1 3 4|7 2 8|
+     * 9 |2 4 7|6 9 8|5 3 1|
+     * -------------------
+     * <p>
+     * <p>
+     * 1 2 3 4 5 6 7 8 9
+     * -------------------
+     * 1 |6 0 0|0 0 1|0 4 0|
+     * 2 |0 0 0|9 6 5|0 1 2|
+     * 3 |8 1 0|0 4 0|0 0 0|
+     * -------------------
+     * 4 |0 5 0|3 0 2|0 7 0|
+     * 5 |7 0 0|0 0 0|1 8 9|
+     * 6||0 0 0|0 7 0|0 0 3|
+     * -------------------
+     * 7 |3 0 0|0 2 0|9 0 4|
+     * 8 |0 9 0|0 0 0|7 2 0|
+     * 9 |2 4 0|6 9 0|0 0 0|
+     * -------------------
+     * <p>
+     * <p>
+     * pré-requis : 0<=k<=3 et g est une grille k^2xk^2 dont les valeurs sont comprises
+     * entre 0 et k^2 et qui est partitionnée en k sous-carrés kxk
+     * action : affiche la  grille g avec ses sous-carrés et avec les numéros des lignes
+     * et des colonnes de 1 à k^2.
+     * Par exemple, pour k = 3, on obtient le dessin d'une grille de Sudoku
+     */
+    public static void afficheGrille(int k, int[][] g) {
+        //__________________________________________________
         if (k != 0) {
             System.out.print("   ");
-            for (int i=1; i <= k*k; i++) {
-                if (i != k*k) System.out.print(i + " ");
+            for (int i = 1; i <= k * k; i++) {
+                if (i != k * k) System.out.print(i + " ");
                 else System.out.print(i);
             }
             System.out.println();
-            for (int i = 0; i<= k*k*2+2; i++) {System.out.print("-");}
+            for (int i = 0; i <= k * k * 2 + 2; i++) {
+                System.out.print("-");
+            }
             System.out.println();
             for (int i = 0; i < g.length; i++) {
-                System.out.print((i+1) + " |");
+                System.out.print((i + 1) + " |");
                 for (int j = 0; j < g[i].length; j++) {
-                    if ((j+1)%k == 0) System.out.print(g[i][j] + "|");
-                    else System.out.print(g[i][j] +" ");
+                    if ((j + 1) % k == 0) System.out.print(g[i][j] + "|");
+                    else System.out.print(g[i][j] + " ");
                 }
                 System.out.println();
-                if ((i+1)%k == 0) {
-                    for (int j = 0; j<= k*k*2+2; j++) {System.out.print("-");}
+                if ((i + 1) % k == 0) {
+                    for (int j = 0; j <= k * k * 2 + 2; j++) {
+                        System.out.print("-");
+                    }
                     System.out.println();
                 }
             }
@@ -153,19 +161,20 @@ public class Sudoku {
     } // fin afficheGrille
     //.........................................................................
 
-    /** pré-requis : k > 0, 0 <= i< k^2 et 0 <= j < k^2
-     *  résultat : (i,j) étant les coordonnées d'une case d'une grille k^2xk^2 partitionnée 
-     *             en k sous-carrés kxk, retourne les coordonnées de la case du haut à gauche
-     *             du sous-carré de la grille contenant cette case.
-     *  Par exemple, si k=3, i=5 et j=7, la fonction retourne (3,6).
+    /**
+     * pré-requis : k > 0, 0 <= i< k^2 et 0 <= j < k^2
+     * résultat : (i,j) étant les coordonnées d'une case d'une grille k^2xk^2 partitionnée
+     * en k sous-carrés kxk, retourne les coordonnées de la case du haut à gauche
+     * du sous-carré de la grille contenant cette case.
+     * Par exemple, si k=3, i=5 et j=7, la fonction retourne (3,6).
      */
-    public static int[] debCarre(int k,int i,int j){
-	//__________________________________________________
+    public static int[] debCarre(int k, int i, int j) {
+        //__________________________________________________
         int[] Indice = new int[2];
-        int iCarre = (i/k); //la ligne du sous-carré -> quotient rond
-        int jCarre = (j/k); //la colonne du cous-carré -> quotient rond
-        Indice[0] = (iCarre*k); //quotient rond*k donne la position ligne 0 dans sous-carré
-        Indice[1] = (jCarre*k); //quotient rond*k donne la position colonne 0 dans sous-carré
+        int iCarre = (i / k); //la ligne du sous-carré -> quotient rond
+        int jCarre = (j / k); //la colonne du cous-carré -> quotient rond
+        Indice[0] = (iCarre * k); //quotient rond*k donne la position ligne 0 dans sous-carré
+        Indice[1] = (jCarre * k); //quotient rond*k donne la position colonne 0 dans sous-carré
         return Indice;
     }  // fin debCarre
 
@@ -175,77 +184,77 @@ public class Sudoku {
     // Initialisation
     //.........................................................................
 
-    /** MODIFICI
-     *  pré-requis : gComplete est une matrice 9X9
-     *  action   :   remplit gComplete pour que la grille de Sudoku correspondante soit complète
-     *  stratégie :  les valeurs sont données directement dans le code et on peut utiliser copieMatrice pour mettre à jour gComplete
+    /**
+     * MODIFICI
+     * pré-requis : gComplete est une matrice 9X9
+     * action   :   remplit gComplete pour que la grille de Sudoku correspondante soit complète
+     * stratégie :  les valeurs sont données directement dans le code et on peut utiliser copieMatrice pour mettre à jour gComplete
      */
-    public static void initGrilleComplete(int [][] gComplete){
-        int [][] grille = 
-          {{6,2,9,7,8,1,3,4,5},
-		   {4,7,3,9,6,5,8,1,2},
-		   {8,1,5,2,4,3,6,9,7},
-		   {9,5,8,3,1,2,4,7,6},
-		   {7,3,2,4,5,6,1,8,9},
-		   {1,6,4,8,7,9,2,5,3},
-		   {3,8,1,5,2,7,9,6,4},
-		   {5,9,6,1,3,4,7,2,8},
-		   {2,4,7,6,9,8,5,3,1}};
+    public static void initGrilleComplete(int[][] gComplete) {
+        int[][] grille =
+                {{6, 2, 9, 7, 8, 1, 3, 4, 5},
+                        {4, 7, 3, 9, 6, 5, 8, 1, 2},
+                        {8, 1, 5, 2, 4, 3, 6, 9, 7},
+                        {9, 5, 8, 3, 1, 2, 4, 7, 6},
+                        {7, 3, 2, 4, 5, 6, 1, 8, 9},
+                        {1, 6, 4, 8, 7, 9, 2, 5, 3},
+                        {3, 8, 1, 5, 2, 7, 9, 6, 4},
+                        {5, 9, 6, 1, 3, 4, 7, 2, 8},
+                        {2, 4, 7, 6, 9, 8, 5, 3, 1}};
         copieMatrice(grille, gComplete);
     } // fin initGrilleComplete
 
     //.........................................................................
 
-    /** MODIFICI
-     *  pré-requis : gSecret est une grille de Sudoku complète de mêmes dimensions que gIncomplete et 0 <= nbTrous <= 81
-     *  action :     modifie gIncomplete pour qu'elle corresponde à une version incomplète de la grille de Sudoku gSecret (gIncomplete peut être complétée en gSecret), 
-     *               avec nbTrous trous à des positions aléatoires
+    /**
+     * MODIFICI
+     * pré-requis : gSecret est une grille de Sudoku complète de mêmes dimensions que gIncomplete et 0 <= nbTrous <= 81
+     * action :     modifie gIncomplete pour qu'elle corresponde à une version incomplète de la grille de Sudoku gSecret (gIncomplete peut être complétée en gSecret),
+     * avec nbTrous trous à des positions aléatoires
      */
-    public static void initGrilleIncomplete(int nbTrous, int [][] gSecret, int[][] gIncomplete){
-	//___________________________________________________________________________
+    public static void initGrilleIncomplete(int nbTrous, int[][] gSecret, int[][] gIncomplete) {
+        //___________________________________________________________________________
         copieMatrice(gSecret, gIncomplete);
         for (int i = 1; i <= nbTrous; i++) {
-            int ligne = Ut.randomMinMax(0, gIncomplete.length-1);
-            int colonne = Ut.randomMinMax(0, gIncomplete[ligne].length-1);
+            int ligne = Ut.randomMinMax(0, gIncomplete.length - 1);
+            int colonne = Ut.randomMinMax(0, gIncomplete[ligne].length - 1);
             if (gIncomplete[ligne][colonne] == 0) {
                 i--;
-            }
-            else gIncomplete[ligne][colonne] = 0;
+            } else gIncomplete[ligne][colonne] = 0;
         }
     } // fin initGrilleIncomplete
-	
+
     //.........................................................................
 
-    /** MODIFICI
-     *  pré-requis : 0 <= nbTrous <= 81 ; g est une grille 9x9 (vide a priori)
-     *  action :   remplit g avec des valeurs saisies au clavier comprises entre 0 et 9
-     *               avec exactement nbTrous valeurs nulles
-     *               et avec re-saisie jusqu'à ce que ces conditions soient vérifiées.
-     *               On suppose dans la version de base que la grille saisie est bien une grille de Sudoku incomplète.
-     *  stratégie : utilise la fonction saisirEntierMinMax
+    /**
+     * MODIFICI
+     * pré-requis : 0 <= nbTrous <= 81 ; g est une grille 9x9 (vide a priori)
+     * action :   remplit g avec des valeurs saisies au clavier comprises entre 0 et 9
+     * avec exactement nbTrous valeurs nulles
+     * et avec re-saisie jusqu'à ce que ces conditions soient vérifiées.
+     * On suppose dans la version de base que la grille saisie est bien une grille de Sudoku incomplète.
+     * stratégie : utilise la fonction saisirEntierMinMax
      */
-    public static void saisirGrilleIncomplete(int nbTrous, int [][] g){
-	//_________________________________________________
+    public static void saisirGrilleIncomplete(int nbTrous, int[][] g) {
+        //_________________________________________________
         int trou = 0;
         int k = 0;
         int remplis = 0;
         for (int i = 0; i < g.length; i++) {
             for (int j = 0; j < g[i].length; j++) {
-                int restant = g.length*g.length - remplis;
-                if(restant == nbTrous - trou) {
+                int restant = g.length * g.length - remplis;
+                if (restant == nbTrous - trou) {
                     g[i][j] = 0;
                     remplis++;
                     trou++;
-                }
-                else {
+                } else {
                     if (trou < nbTrous) {
-                        k = saisirEntierMinMax(0,9);
+                        k = saisirEntierMinMax(0, 9);
                         g[i][j] = k;
                         if (k == 0) trou++;
-                    }
-                    else if (trou == nbTrous){
-                            k = saisirEntierMinMax(1,9);
-                            g[i][j] = k;
+                    } else if (trou == nbTrous) {
+                        k = saisirEntierMinMax(1, 9);
+                        g[i][j] = k;
                     }
                     remplis++;
                 }
@@ -255,51 +264,59 @@ public class Sudoku {
 
     //.........................................................................
 
-    /** MODIFICI
-     *  pré-requis : 0 <= nbTrous <= 81 ; g est une grille 9x9 (vide a priori) ; 
-     *               fic est un nom de fichier de ce répertoire contenant des valeurs de Sudoku
-     *  action :   remplit g avec les valeurs lues dans fic. Si la grille ne contient pas des valeurs 
-     *             entre 0 et 9 ou n'a pas exactement nbTrous valeurs nulles, la méthode doit signaler l'erreur,
-     *             et l'utilisateur doit corriger le fichier jusqu'à ce que ces conditions soient vérifiées.
-     *             On suppose dans la version de base que la grille saisie est bien une grille de Sudoku incomplète.
+    /**
+     * MODIFICI
+     * pré-requis : 0 <= nbTrous <= 81 ; g est une grille 9x9 (vide a priori) ;
+     * fic est un nom de fichier de ce répertoire contenant des valeurs de Sudoku
+     * action :   remplit g avec les valeurs lues dans fic. Si la grille ne contient pas des valeurs
+     * entre 0 et 9 ou n'a pas exactement nbTrous valeurs nulles, la méthode doit signaler l'erreur,
+     * et l'utilisateur doit corriger le fichier jusqu'à ce que ces conditions soient vérifiées.
+     * On suppose dans la version de base que la grille saisie est bien une grille de Sudoku incomplète.
      */
-    public static void saisirGrilleIncompleteFichier(int nbTrous, int [][] g, String fic){
-	//_________________________________________________
+    public static void saisirGrilleIncompleteFichier(int nbTrous, int[][] g, String fic) {
+        //_________________________________________________
 
-	try (BufferedReader lecteur = new BufferedReader(new FileReader(fic))) {  
-        int trou = 0;
-	    for (int i = 0 ; i < 9 ; i++){
-		String ligne = lecteur.readLine();
-		String [] valeurs = ligne.split("\\s+");
-		for (int j = 0 ; j < 9 ; j++) {
-            int valeur = Integer.parseInt(valeurs[j]);
-                if (valeur < 0 || valeur > 9) {
-                    System.out.println("Erreur : La valeur doit être entre 0 et 9 inclus");
-                    return;
+        try (BufferedReader lecteur = new BufferedReader(new FileReader(fic))) {
+            int trou = 0;
+            for (int i = 0; i < 9; i++) {
+                String ligne = lecteur.readLine();
+                String[] valeurs = ligne.split("\\s+");
+                for (int j = 0; j < 9; j++) {
+                    int valeur = Integer.parseInt(valeurs[j]);
+                    if (valeur < 0 || valeur > 9) {
+                        System.out.println("Erreur : La valeur doit être entre 0 et 9 inclus");
+                        return;
+                    }
+                    g[i][j] = valeur;
+                    if (valeur == 0) {
+                        trou++;
+                    }
                 }
-		    g[i][j] = valeur;
-            if (valeur == 0) {trou++;}
-		}
-	    }
-        if (trou > nbTrous) {System.out.println("Attention il y a trop de trous ! Veuillez corriger");}
-        if (trou < nbTrous) {System.out.println("Attention il n'y a pas assez de trous ! Veuillez corriger");}
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+            }
+            if (trou > nbTrous) {
+                System.out.println("Attention il y a trop de trous ! Veuillez corriger");
+            }
+            if (trou < nbTrous) {
+                System.out.println("Attention il n'y a pas assez de trous ! Veuillez corriger");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     } // fin saisirGrilleIncompleteFichier
 
 
-    /** pré-requis : gOrdi est une grille de Sudoku incomplète,
-     *               valPossibles est une matrice 9x9 de tableaux de 10 booléens
-     *               et nbValPoss est une matrice 9x9 d'entiers
-     *  action : met dans valPossibles l'ensemble des entiers de 1 à 9 pour chaque trou de gOrdi
-     *           et leur nombre dans nbValPoss       
+    /**
+     * pré-requis : gOrdi est une grille de Sudoku incomplète,
+     * valPossibles est une matrice 9x9 de tableaux de 10 booléens
+     * et nbValPoss est une matrice 9x9 d'entiers
+     * action : met dans valPossibles l'ensemble des entiers de 1 à 9 pour chaque trou de gOrdi
+     * et leur nombre dans nbValPoss
      */
-    public static void initPleines(int [][] gOrdi, boolean[][][] valPossibles, int [][] nbValPoss){
-	//________________________________________________________________________________________________
-        for(int x=0; x<gOrdi.length; x++){ //parcours des lignes
-            for(int y=0; y<gOrdi.length; y++){ //parcours des colonnes 
-                if(gOrdi[x][y] == 0){ //Si il rencontre un trou
+    public static void initPleines(int[][] gOrdi, boolean[][][] valPossibles, int[][] nbValPoss) {
+        //________________________________________________________________________________________________
+        for (int x = 0; x < gOrdi.length; x++) { //parcours des lignes
+            for (int y = 0; y < gOrdi.length; y++) { //parcours des colonnes
+                if (gOrdi[x][y] == 0) { //Si il rencontre un trou
                     nbValPoss[x][y] = 9; //change le nb de valeurs possibles dans nbValPoss à 9
                     valPossibles[x][y] = ensPlein(9); //remplace chaque valeur du tab de boolean correspondant au trou par true
                 }
@@ -310,15 +327,16 @@ public class Sudoku {
     //.........................................................................
 
 
-    /** pré-requis : gOrdi est une grille de Sudoku incomplète,
-     *               0 <= i < 9, 0 <= j < 9, gOrdi[i][j] > 0,
-     *               valPossibles est une matrice 9x9 de tableaux de 10 booléens
-     *               et nbValPoss est une matrice 9x9 d'entiers
-     *  action : supprime dans les matrices valPossibles et nbValPoss la valeur gOrdi[i][j] pour chaque case de la ligne,
-     *           de la colonne et du carré contenant la case (i,j) correspondant à un trou de gOrdi.
+    /**
+     * pré-requis : gOrdi est une grille de Sudoku incomplète,
+     * 0 <= i < 9, 0 <= j < 9, gOrdi[i][j] > 0,
+     * valPossibles est une matrice 9x9 de tableaux de 10 booléens
+     * et nbValPoss est une matrice 9x9 d'entiers
+     * action : supprime dans les matrices valPossibles et nbValPoss la valeur gOrdi[i][j] pour chaque case de la ligne,
+     * de la colonne et du carré contenant la case (i,j) correspondant à un trou de gOrdi.
      */
-    public static void suppValPoss(int [][] gOrdi, int i, int j, boolean[][][] valPossibles, int [][]nbValPoss){
-	//_____________________________________________________________________________________________________________
+    public static void suppValPoss(int[][] gOrdi, int i, int j, boolean[][][] valPossibles, int[][] nbValPoss) {
+        //_____________________________________________________________________________________________________________
         int nb = gOrdi[i][j];
         //modif sur la ligne
         for (int a = 0; a < gOrdi.length; a++) {
@@ -333,9 +351,9 @@ public class Sudoku {
             }
         }
         //modif carré
-        int [] tablo = debCarre(3, i, j);
-        for (int a = tablo[0]; a <= (tablo[0]+2); a++) {
-            for (int b = tablo[1]; b <= (tablo[1]+2); b++) {
+        int[] tablo = debCarre(3, i, j);
+        for (int a = tablo[0]; a <= (tablo[0] + 2); a++) {
+            for (int b = tablo[1]; b <= (tablo[1] + 2); b++) {
                 if (gOrdi[a][b] == 0 && supprime(valPossibles[a][b], nb)) {
                     nbValPoss[a][b] -= 1;
                 }
@@ -345,112 +363,118 @@ public class Sudoku {
 
 
     //..................................Méthodes nécessaires à l'extension 3.7 avec k = 2.......................................
-    public static int[] QuellesValeurs(boolean[] T1){
+    public static int[] QuellesValeurs(boolean[] T1) {
         //doit retourner un tableau avec les valeurs possibles d'un Trou a partir de son tableau de booleen
-        int[] Val = new int[0];
+        int[] Val = new int[9];
         int k = 0;
-        for(boolean element:T1){
-            if(element) Val[k] = k;
+        for (boolean element : T1) {
+            if (element) Val[k] = k;
             k++;
         }
         return Val;
     }
 
-    public static void suppValPoss2Ligne(int [][] gOrdi, int[] TabVal, int i1, int j1, int j2, boolean[][][] valPossibles, int [][]nbValPoss){
-    //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
-        for(int element:TabVal){
+    public static void suppValPoss2Ligne(int[][] gOrdi, int[] TabVal, int i1, int j1, int j2, boolean[][][] valPossibles, int[][] nbValPoss) {
+        //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
+        for (int element : TabVal) {
             int nb = element;
             //modif sur la ligne
             for (int a = 0; a < gOrdi.length; a++) {
-                if ((a != j1)&&(a != j2)){
+                if ((a != j1) && (a != j2)) {
                     if (gOrdi[i1][a] == 0 && supprime(valPossibles[i1][a], nb)) {
                         nbValPoss[i1][a] -= 1;
                     }
                 }
-            }      
+            }
         }
     }
 
-    public static void suppValPoss2Colonne(int [][] gOrdi, int[] TabVal, int j1, int i1, int i2, boolean[][][] valPossibles, int [][]nbValPoss){
-    //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
-        for(int element:TabVal){
+    public static void suppValPoss2Colonne(int[][] gOrdi, int[] TabVal, int j1, int i1, int i2, boolean[][][] valPossibles, int[][] nbValPoss) {
+        //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
+        for (int element : TabVal) {
             int nb = element;
             //modif sur la colonne
             for (int b = 0; b < gOrdi.length; b++) {
-                if ((b != i1) && (b != i2)){
+                if ((b != i1) && (b != i2)) {
                     if (gOrdi[b][j1] == 0 && supprime(valPossibles[b][j1], nb)) {
                         nbValPoss[b][j1] -= 1;
                     }
                 }
-            }       
+            }
         }
     }
 
-    public static void suppValPoss2Carre(int [][] gOrdi, int[] TabVal, int i1, int j1, int i2, int j2, boolean[][][] valPossibles, int [][]nbValPoss){
-    //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
-        for(int element:TabVal){
+    public static void suppValPoss2Carre(int[][] gOrdi, int[] TabVal, int i1, int j1, int i2, int j2, boolean[][][] valPossibles, int[][] nbValPoss) {
+        //Suppprime les valeurs impossibles partout ailleurs dans le tableau sauf sur 2 trous d'une meme ligne
+        for (int element : TabVal) {
             int nb = element;
             //modif carré
-            int [] tablo = debCarre(3, i1, j1);
-            for (int a = tablo[0]; a <= (tablo[0]+2); a++) {
-                for (int b = tablo[1]; b <= (tablo[1]+2); b++) {
-                    if( ((a != i1)&&(b != j1)) && ((a != i2)&&(b != j2)) ){
+            int[] tablo = debCarre(3, i1, j1);
+            for (int a = tablo[0]; a <= (tablo[0] + 2); a++) {
+                for (int b = tablo[1]; b <= (tablo[1] + 2); b++) {
+                    if (((a != i1) && (b != j1)) && ((a != i2) && (b != j2))) {
                         if (gOrdi[a][b] == 0 && supprime(valPossibles[a][b], nb)) {
                             nbValPoss[a][b] -= 1;
                         }
                     }
                 }
-            }        
+            }
         }
     }
     //.........................................................................
-    /** pré-requis : gOrdi est une grille de Sudoju incomplète,
-     *               valPossibles est une matrice 9x9 de tableaux de 10 booléens
-     *               et nbValPoss est une matrice 9x9 d'entiers
+
+    /**
+     * pré-requis : gOrdi est une grille de Sudoju incomplète,
+     * valPossibles est une matrice 9x9 de tableaux de 10 booléens
+     * et nbValPoss est une matrice 9x9 d'entiers
      * action :      met dans valPossibles l'ensemble des valeurs possibles de chaque trou de gOrdi
-     *               et leur nombre dans nbValPoss       
+     * et leur nombre dans nbValPoss
      */
-    public static void initPossibles(int [][] gOrdi, boolean[][][] valPossibles, int [][]nbValPoss){
-	//________________________________________________________________________________________________
+    public static void initPossibles(int[][] gOrdi, boolean[][][] valPossibles, int[][] nbValPoss) {
+        //________________________________________________________________________________________________
         int n = gOrdi.length; //Stocke la longueur
 
         initPleines(gOrdi, valPossibles, nbValPoss); //Initialise la grille
 
-        for(int i = 0; i < n; i++){ //Supprime les valeurs pas possibles
-            for(int j = 0; j < n; j++){
+        for (int i = 0; i < n; i++) { //Supprime les valeurs pas possibles
+            for (int j = 0; j < n; j++) {
                 if (gOrdi[i][j] != 0) suppValPoss(gOrdi, i, j, valPossibles, nbValPoss);
             }
         }
-        /**********************EXTENSION avec k = 2**********************/
-        for(int i1 = 0; i1 < n; i1++){ 
-            for(int j1 = 0; j1 < n-1; j1++){
-                if(nbValPoss[i1][j1]==2){
+    }
+
+    /**********************EXTENSION avec k = 2**********************/
+    public static void suppValImpossibles(int[][] gOrdi, boolean[][][] valPossibles, int[][] nbValPoss) {
+        int n = gOrdi.length;
+        for (int i1 = 0; i1 < n - 1; i1++) {
+            for (int j1 = 0; j1 < n - 1; j1++) {
+                if (nbValPoss[i1][j1] == 2) {
                     //parcours de la ligne en quête d'un autre trou
-                    for(int j2 = j1+1; j2 < n; j2++){
-                        if(nbValPoss[i1][j2]==2){
-                            if(Arrays.equals(valPossibles[i1][j1], valPossibles[i1][j2])){
-                                int [] TabVal = QuellesValeurs(valPossibles[i1][j1]);
+                    for (int j2 = j1 + 1; j2 < n; j2++) {
+                        if (nbValPoss[i1][j2] == 2) {
+                            if (Arrays.equals(valPossibles[i1][j1], valPossibles[i1][j2])) {
+                                int[] TabVal = QuellesValeurs(valPossibles[i1][j1]);
                                 suppValPoss2Ligne(gOrdi, TabVal, i1, j1, j2, valPossibles, nbValPoss);
                             }
                         }
                     }
                     //parcours de la la colonne en quête d'un autre trou
-                    for(int i2 = i1+1; i1 < n; i2++){
-                        if(nbValPoss[i2][j1]==2){
-                            if(Arrays.equals(valPossibles[i1][j1], valPossibles[i2][j1])){
-                                int [] TabVal = QuellesValeurs(valPossibles[i1][j1]);
+                    for (int i2 = i1 + 1; i2 < n; i2++) {
+                        if (nbValPoss[i2][j1] == 2) {
+                            if (Arrays.equals(valPossibles[i1][j1], valPossibles[i2][j1])) {
+                                int[] TabVal = QuellesValeurs(valPossibles[i1][j1]);
                                 suppValPoss2Colonne(gOrdi, TabVal, j1, i1, i2, valPossibles, nbValPoss);
                             }
                         }
                     }
                     //parcours du carré en quête d'un autre trou
-                    int [] tablo = debCarre(3, i1, j1);
-                    for (int a = tablo[0]; a <= (tablo[0]+2); a++) {
-                        for (int b = tablo[1]; b <= (tablo[1]+2); b++) {
-                            if ((a != i1)&&(b != j1)){
-                                if(nbValPoss[a][b]==2){
-                                    if(Arrays.equals(valPossibles[i1][j1], valPossibles[a][b])){
-                                        int [] TabVal = QuellesValeurs(valPossibles[i1][j1]);
+                    int[] tablo = debCarre(3, i1, j1);
+                    for (int a = tablo[0]; a <= (tablo[0] + 2); a++) {
+                        for (int b = tablo[1]; b <= (tablo[1] + 2); b++) {
+                            if ((a != i1) && (b != j1)) {
+                                if (nbValPoss[a][b] == 2) {
+                                    if (Arrays.equals(valPossibles[i1][j1], valPossibles[a][b])) {
+                                        int[] TabVal = QuellesValeurs(valPossibles[i1][j1]);
                                         suppValPoss2Carre(gOrdi, TabVal, i1, j1, a, b, valPossibles, nbValPoss);
                                     }
                                 }
@@ -461,6 +485,7 @@ public class Sudoku {
             }
         }
     }  // fin initPossibles
+
 
     //.........................................................................
 
@@ -650,10 +675,61 @@ public class Sudoku {
      *               et affiche qui a gagné
      */
     public static void main(String[] args){
-        int gagnant = partie();
+        /*int gagnant = partie();
         if (gagnant == 0) System.out.println("C'est un match nul !");
         else if (gagnant == 1) System.out.println("L'humain a gagné !");
-        else System.out.println("L'ordinateur a gagné !");
-     // fin main
+        else System.out.println("L'ordinateur a gagné !");*/
+        //Ici je teste avec {1,2} {1,2} {1,2,3}>{3} sur la LIGNE du milleu
+        int[][] g1 = {  { 6, 0, 9, 7, 8, 1, 3, 4, 5 },
+                { 4, 7, 3, 9, 6, 5, 8, 1, 2 },
+                { 8, 0, 5, 2, 4, 3, 6, 9, 7 },
+                { 9, 5, 8, 3, 1, 2, 4, 7, 6 },
+                { 7, 0, 0, 4, 5, 6, 0, 8, 9 },
+                { 0, 6, 4, 8, 7, 9, 0, 5, 3 },
+                { 3, 8, 0, 5, 2, 7, 9, 6, 4 },
+                { 5, 9, 6, 1, 3, 4, 7, 2, 8 },
+                { 2, 4, 7, 6, 9, 8, 5, 3, 1 } };
+        int[][] nbValPoss1 = new int[9][9];
+        boolean[][][] valPossibles1 = new boolean[9][9][10];
+        System.out.println("\nTest LIGNES, Le 3 doit devenir 1 mais les 2 restent des 2");
+        initPossibles(g1, valPossibles1, nbValPoss1);
+        afficheGrille(3, nbValPoss1);
+        suppValImpossibles(g1, valPossibles1,nbValPoss1);
+        afficheGrille(3, nbValPoss1);
+        //Ici je teste avec {4,5} {4,5} {4,5,6}>{6} sur la COLONNE du millieu
+        int[][] g2 = {  { 6, 2, 9, 7, 8, 1, 3, 4, 5 },
+                { 0, 7, 3, 9, 0, 0, 8, 1, 2 },
+                { 8, 1, 0, 2, 0, 3, 6, 9, 7 },
+                { 9, 5, 8, 3, 1, 2, 4, 7, 6 },
+                { 7, 3, 2, 0, 0, 6, 1, 8, 9 },
+                { 1, 6, 4, 8, 7, 9, 2, 5, 3 },
+                { 3, 8, 1, 5, 2, 7, 9, 6, 4 },
+                { 5, 9, 6, 1, 3, 4, 7, 2, 8 },
+                { 2, 4, 7, 6, 9, 8, 5, 3, 1 } };
+        int[][] nbValPoss2 = new int[9][9];
+        boolean[][][] valPossibles2 = new boolean[9][9][10];
+        System.out.println("\nTest COLONNES, Le 3 doit devenir 1 mais les 2 restent des 2");
+        initPossibles(g2, valPossibles2, nbValPoss2);
+        afficheGrille(3, nbValPoss2);
+        suppValImpossibles(g2, valPossibles2,nbValPoss2);
+        afficheGrille(3, nbValPoss2);
+        //Ici je teste avec {7,8} {7,8} {7,8,9}>{9} sur le CARRE du millieu
+        int[][] g3 = {  { 6, 2, 9, 7, 0, 1, 3, 4, 5 },
+                { 4, 7, 3, 9, 6, 5, 8, 1, 2 },
+                { 8, 1, 5, 2, 4, 3, 6, 9, 7 },
+                { 9, 5, 8, 3, 1, 2, 4, 7, 6 },
+                { 7, 3, 2, 4, 5, 6, 1, 8, 9 },
+                { 1, 6, 4, 8, 0, 9, 2, 5, 3 },
+                { 3, 0, 1, 5, 2, 0, 9, 6, 4 },
+                { 5, 9, 6, 1, 3, 4, 7, 2, 8 },
+                { 2, 4, 0, 6, 0, 0, 5, 3, 1 } };
+        int[][] nbValPoss3 = new int[9][9];
+        boolean[][][] valPossibles3 = new boolean[9][9][10];
+        System.out.println("\nTest CARRE, Le 3 doit devenir 1 mais les 2 restent des 2");
+        initPossibles(g3, valPossibles3, nbValPoss3);
+        afficheGrille(3, nbValPoss3);
+        suppValImpossibles(g3, valPossibles3,nbValPoss3);
+        afficheGrille(3, nbValPoss3);
+        // fin main
     }
 } // fin SudokuBase

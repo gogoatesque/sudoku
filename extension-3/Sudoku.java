@@ -20,7 +20,7 @@ public class Sudoku {
         boolean mis = false;
         int ligne = 1;
         while (ligne < 82 && !mis && trou.length == 2) {
-            if (tabTrous[ligne][0] == 0 && tabTrous[ligne][1] == 0) {
+            if (tabTrous[ligne][0] == 0 && tabTrous[ligne][1] == 0 && valremplie < ligne) {
                 tabTrous[ligne][0] = trou[0];
                 tabTrous[ligne][1] = trou[1];
                 mis = true;
